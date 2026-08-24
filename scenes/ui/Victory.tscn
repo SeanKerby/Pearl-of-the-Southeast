@@ -1,0 +1,66 @@
+﻿[gd_scene load_steps=2 format=3 uid="uid://b9q7rv0cxm5n8"]
+
+[ext_resource type="Script" path="res://scripts/ui/Victory.gd" id="1_victory"]
+
+[node name="Victory" type="CanvasLayer"]
+script = ExtResource("1_victory")
+
+[node name="Overlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.04, 0.08, 0.12, 0.9)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.4, 1)
+theme_override_font_sizes/font_size = 44
+text = "PEARL OF SOUTHEAST"
+horizontal_alignment = 1
+
+[node name="VictoryLabel" type="Label" parent="CenterContainer/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 1.0, 0.7, 1)
+theme_override_font_sizes/font_size = 26
+text = "THE CONNECTION HAS BEEN RESTORED"
+horizontal_alignment = 1
+
+[node name="SubLabel" type="Label" parent="CenterContainer/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 0.85, 1)
+theme_override_font_sizes/font_size = 16
+text = "All three artifacts have been returned to the ancient sanctuary.\nThe bond between past and present lives once more."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBox"]
+layout_mode = 2
+
+[node name="PlayAgainButton" type="Button" parent="CenterContainer/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 46)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 18
+text = "PLAY AGAIN"
+
+[node name="MainMenuButton" type="Button" parent="CenterContainer/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 46)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 18
+text = "MAIN MENU"

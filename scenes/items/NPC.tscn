@@ -1,0 +1,49 @@
+﻿[gd_scene load_steps=5 format=3 uid="uid://dnpc1villageelder"]
+
+[ext_resource type="Script" path="res://scripts/systems/NPC.gd" id="1_npc"]
+[ext_resource type="Texture2D" uid="uid://fy85xutrexc" path="res://characters/mangyan/idle_down.png" id="2_tex"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_interact"]
+radius = 36.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 8.0
+height = 20.0
+
+[node name="VillageElder" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_npc")
+npc_name = "Village Elder"
+dialog_lines = [
+	"Greetings, brave explorer! The village is glad to have you.",
+	"The sacred Forest Relic is locked inside the treasure chest at the southeastern oasis (5).",
+	"Beware! Jungle Boars roam the western path (3), and elusive Forest Spirits guard the trees (4).",
+	"Once you claim the relic, confront the Forest Guardian at the ancient sanctuary (6) to unlock the way to the coast!"
+]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tex")
+modulate = Color(1.0, 0.95, 0.7, 1.0)
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_interact")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="BodyCol" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="PromptLabel" type="Label" parent="."]
+offset_left = -60.0
+offset_top = -32.0
+offset_right = 60.0
+offset_bottom = -14.0
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 11
+text = "Press E to Talk"
+horizontal_alignment = 1

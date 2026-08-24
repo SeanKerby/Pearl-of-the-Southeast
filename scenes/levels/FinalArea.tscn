@@ -1,0 +1,181 @@
+﻿[gd_scene load_steps=9 format=3 uid="uid://cp7m2nqr9bk6y"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="1_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="2_pause"]
+[ext_resource type="Script" path="res://scripts/systems/FinalArea.gd" id="3_script"]
+
+[sub_resource type="RectangleShape2D" id="Shape_wall_h"]
+size = Vector2(640, 16)
+
+[sub_resource type="RectangleShape2D" id="Shape_wall_v"]
+size = Vector2(16, 640)
+
+[sub_resource type="CircleShape2D" id="Shape_restoration"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="Shape_pillar"]
+radius = 18.0
+
+[node name="FinalArea" type="Node2D"]
+script = ExtResource("3_script")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+size = Vector2(640, 640)
+color = Color(0.05, 0.05, 0.1, 1)
+
+[node name="WorldBounds" type="Node2D" parent="."]
+
+[node name="TopWall" type="StaticBody2D" parent="WorldBounds"]
+position = Vector2(320, -8)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/TopWall"]
+shape = SubResource("Shape_wall_h")
+
+[node name="BottomWall" type="StaticBody2D" parent="WorldBounds"]
+position = Vector2(320, 648)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/BottomWall"]
+shape = SubResource("Shape_wall_h")
+
+[node name="LeftWall" type="StaticBody2D" parent="WorldBounds"]
+position = Vector2(-8, 320)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/LeftWall"]
+shape = SubResource("Shape_wall_v")
+
+[node name="RightWall" type="StaticBody2D" parent="WorldBounds"]
+position = Vector2(648, 320)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/RightWall"]
+shape = SubResource("Shape_wall_v")
+
+[node name="SanctuaryFloor" type="ColorRect" parent="."]
+position = Vector2(120, 120)
+size = Vector2(400, 400)
+color = Color(0.15, 0.13, 0.2, 1)
+
+[node name="RestorationPoint" type="Node2D" parent="."]
+position = Vector2(320, 280)
+
+[node name="GlowBase" type="ColorRect" parent="RestorationPoint"]
+position = Vector2(-55, -55)
+size = Vector2(110, 110)
+color = Color(0.4, 0.3, 0.7, 0.4)
+
+[node name="InnerBase" type="ColorRect" parent="RestorationPoint"]
+position = Vector2(-36, -36)
+size = Vector2(72, 72)
+color = Color(0.55, 0.45, 0.85, 0.7)
+
+[node name="RestorationLabel" type="Label" parent="RestorationPoint"]
+position = Vector2(-100, -76)
+size = Vector2(200, 24)
+theme_override_colors/font_color = Color(0.9, 0.85, 0.4, 1)
+theme_override_font_sizes/font_size = 13
+text = "ARTIFACT RESTORATION POINT"
+horizontal_alignment = 1
+
+[node name="PromptLabel" type="Label" parent="RestorationPoint"]
+position = Vector2(-80, 44)
+size = Vector2(160, 18)
+theme_override_colors/font_color = Color(0.75, 0.95, 0.8, 1)
+theme_override_font_sizes/font_size = 11
+text = "Press E to Restore"
+horizontal_alignment = 1
+
+[node name="RestorationArea" type="Area2D" parent="RestorationPoint"]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RestorationPoint/RestorationArea"]
+shape = SubResource("Shape_restoration")
+
+[node name="Pillar1" type="StaticBody2D" parent="."]
+position = Vector2(160, 180)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pillar1"]
+shape = SubResource("Shape_pillar")
+
+[node name="PillarVisual1" type="ColorRect" parent="."]
+position = Vector2(144, 164)
+size = Vector2(32, 80)
+color = Color(0.35, 0.3, 0.45, 1)
+
+[node name="Pillar2" type="StaticBody2D" parent="."]
+position = Vector2(480, 180)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pillar2"]
+shape = SubResource("Shape_pillar")
+
+[node name="PillarVisual2" type="ColorRect" parent="."]
+position = Vector2(464, 164)
+size = Vector2(32, 80)
+color = Color(0.35, 0.3, 0.45, 1)
+
+[node name="Pillar3" type="StaticBody2D" parent="."]
+position = Vector2(160, 400)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pillar3"]
+shape = SubResource("Shape_pillar")
+
+[node name="PillarVisual3" type="ColorRect" parent="."]
+position = Vector2(144, 384)
+size = Vector2(32, 80)
+color = Color(0.35, 0.3, 0.45, 1)
+
+[node name="Pillar4" type="StaticBody2D" parent="."]
+position = Vector2(480, 400)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pillar4"]
+shape = SubResource("Shape_pillar")
+
+[node name="PillarVisual4" type="ColorRect" parent="."]
+position = Vector2(464, 384)
+size = Vector2(32, 80)
+color = Color(0.35, 0.3, 0.45, 1)
+
+[node name="TorchL" type="Label" parent="."]
+position = Vector2(140, 166)
+theme_override_font_sizes/font_size = 16
+text = "🔥"
+
+[node name="TorchR" type="Label" parent="."]
+position = Vector2(460, 166)
+theme_override_font_sizes/font_size = 16
+text = "🔥"
+
+[node name="TorchBL" type="Label" parent="."]
+position = Vector2(140, 386)
+theme_override_font_sizes/font_size = 16
+text = "🔥"
+
+[node name="TorchBR" type="Label" parent="."]
+position = Vector2(460, 386)
+theme_override_font_sizes/font_size = 16
+text = "🔥"
+
+[node name="SanctuaryTitle" type="Label" parent="."]
+position = Vector2(170, 490)
+size = Vector2(300, 22)
+theme_override_colors/font_color = Color(0.8, 0.75, 0.45, 1)
+theme_override_font_sizes/font_size = 13
+text = "THE FINAL RESTORATION SANCTUARY"
+horizontal_alignment = 1
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(320, 560)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+instance = ExtResource("1_hud")
+
+[node name="PauseMenu" type="Control" parent="."]
+instance = ExtResource("2_pause")

@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://e_boar_lvl1"]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_enemy"]
+[ext_resource type="Texture2D" path="res://assets/enemies/boar_walk_1.png" id="2_w1"]
+[ext_resource type="Texture2D" path="res://assets/enemies/boar_walk_2.png" id="3_w2"]
+[ext_resource type="Texture2D" path="res://assets/enemies/boar_walk_3.png" id="4_w3"]
+[ext_resource type="Texture2D" path="res://assets/enemies/boar_walk_4.png" id="5_w4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_boar"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_w1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_w2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_w4")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_boar"]
+radius = 12.0
+height = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_detect"]
+radius = 140.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_attack"]
+radius = 28.0
+
+[node name="JungleBoar" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_enemy")
+max_health = 75
+move_speed = 90.0
+detection_range = 140.0
+patrol_radius = 80.0
+patrol_speed = 50.0
+enemy_id = "boar"
+enemy_name = "Jungle Boar"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.55, 0.55)
+sprite_frames = SubResource("SpriteFrames_boar")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_boar")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_detect")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_attack")

@@ -1,0 +1,485 @@
+[gd_scene load_steps=13 format=3 uid="uid://b_adv_map_lvl1"]
+
+[ext_resource type="Script" path="res://scripts/systems/AdventureMap.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/maps/stage 1.jpg" id="2_map_bg"]
+[ext_resource type="Texture2D" path="res://assets/characters/mangyan/idle_down.png" id="3_hero_tex"]
+[ext_resource type="Texture2D" path="res://assets/enemies/crab.png" id="4_enemy_tex"]
+[ext_resource type="Texture2D" path="res://assets/items/forest_relic.png" id="5_relic_tex"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_hud_badge"]
+bg_color = Color(0.08, 0.12, 0.1, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.65, 0.3, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_chap_btn"]
+bg_color = Color(0.12, 0.18, 0.15, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.6, 0.25, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_hp_fill"]
+bg_color = Color(0.2, 0.8, 0.35, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_path_pin"]
+bg_color = Color(0.1, 0.15, 0.12, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.85, 0.3, 0.95)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_modal_card"]
+bg_color = Color(0.07, 0.1, 0.09, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.75, 0.35, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_relic_card"]
+bg_color = Color(0.06, 0.12, 0.1, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.85, 0.3, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0.9, 0.75, 0.2, 0.4)
+shadow_size = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_start_btn"]
+bg_color = Color(0.18, 0.58, 0.28, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.9, 0.5, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_proceed_btn"]
+bg_color = Color(0.15, 0.45, 0.75, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.85, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_close_btn"]
+bg_color = Color(0.45, 0.15, 0.15, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.5, 0.5, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="AdventureMap" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="MapTextureRect" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_map_bg")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="TopHUDContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="ChapterTabs" type="HBoxContainer" parent="TopHUDContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ChapterBtn1" type="Button" parent="TopHUDContainer/ChapterTabs"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(148, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBox_chap_btn")
+text = "🌴 Stage 1: Village"
+
+[node name="ChapterBtn2" type="Button" parent="TopHUDContainer/ChapterTabs"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(148, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBox_chap_btn")
+text = "🌊 Stage 2: Coast"
+
+[node name="ChapterBtn3" type="Button" parent="TopHUDContainer/ChapterTabs"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(148, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBox_chap_btn")
+text = "🏛️ Stage 3: Ruins"
+
+[node name="Spacer" type="Control" parent="TopHUDContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HUDPanel" type="PanelContainer" parent="TopHUDContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_hud_badge")
+
+[node name="Margin" type="MarginContainer" parent="TopHUDContainer/HUDPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 4
+
+[node name="HBox" type="HBoxContainer" parent="TopHUDContainer/HUDPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HeroNameLabel" type="Label" parent="TopHUDContainer/HUDPanel/Margin/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.5, 1)
+theme_override_font_sizes/font_size = 12
+text = "Mangyan Explorer"
+
+[node name="HeroHPBar" type="ProgressBar" parent="TopHUDContainer/HUDPanel/Margin/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(65, 10)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/fill = SubResource("StyleBox_hp_fill")
+value = 100.0
+show_percentage = false
+
+[node name="HeroHPLabel" type="Label" parent="TopHUDContainer/HUDPanel/Margin/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 1, 0.7, 1)
+theme_override_font_sizes/font_size = 11
+text = "100 / 100 HP"
+
+[node name="VSep" type="VSeparator" parent="TopHUDContainer/HUDPanel/Margin/HBox"]
+layout_mode = 2
+
+[node name="RelicsLabel" type="Label" parent="TopHUDContainer/HUDPanel/Margin/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 12
+text = "👑 0 / 3"
+
+[node name="GoldLabel" type="Label" parent="TopHUDContainer/HUDPanel/Margin/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.3, 1)
+theme_override_font_sizes/font_size = 11
+text = "🪙 0"
+
+[node name="CollectiblesLabel" type="Label" parent="TopHUDContainer/HUDPanel/Margin/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 1, 0.8, 1)
+theme_override_font_sizes/font_size = 11
+text = "🍃0  🐚0  🪨0"
+
+[node name="PathNodesLayer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PathNode1" type="Button" parent="PathNodesLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 0
+offset_left = 232.0
+offset_top = 411.0
+offset_right = 268.0
+offset_bottom = 447.0
+pivot_offset = Vector2(18, 18)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBox_path_pin")
+text = "1"
+
+[node name="PathNode2" type="Button" parent="PathNodesLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 0
+offset_left = 640.0
+offset_top = 355.0
+offset_right = 676.0
+offset_bottom = 391.0
+pivot_offset = Vector2(18, 18)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBox_path_pin")
+text = "2"
+
+[node name="PathNode3" type="Button" parent="PathNodesLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 0
+offset_left = 1090.0
+offset_top = 488.0
+offset_right = 1126.0
+offset_bottom = 524.0
+pivot_offset = Vector2(18, 18)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBox_path_pin")
+text = "3"
+
+[node name="PathNode4" type="Button" parent="PathNodesLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 1013.0
+offset_top = 163.0
+offset_right = 1053.0
+offset_bottom = 203.0
+pivot_offset = Vector2(20, 20)
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBox_path_pin")
+text = "💀"
+
+[node name="HeroToken" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+z_index = 10
+position = Vector2(250, 429)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("3_hero_tex")
+
+[node name="ModalBackdrop" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="ModalCenter" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="StageModal" type="PanelContainer" parent="ModalCenter"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(440, 290)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_modal_card")
+
+[node name="Margin" type="MarginContainer" parent="ModalCenter/StageModal"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="ModalCenter/StageModal/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HBoxHeader" type="HBoxContainer" parent="ModalCenter/StageModal/Margin/VBox"]
+layout_mode = 2
+
+[node name="StageTitleLabel" type="Label" parent="ModalCenter/StageModal/Margin/VBox/HBoxHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 16
+text = "STAGE 1: THE COASTAL VILLAGE"
+
+[node name="CloseModalButton" type="Button" parent="ModalCenter/StageModal/Margin/VBox/HBoxHeader"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBox_close_btn")
+text = "✕"
+
+[node name="StageDescLabel" type="Label" parent="ModalCenter/StageModal/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.9, 0.85, 0.9)
+theme_override_font_sizes/font_size = 12
+text = "A peaceful village by the shore where your quest begins."
+autowrap_mode = 2
+
+[node name="HSep" type="HSeparator" parent="ModalCenter/StageModal/Margin/VBox"]
+layout_mode = 2
+
+[node name="HBoxEnemy" type="HBoxContainer" parent="ModalCenter/StageModal/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="EnemyPreviewControl" type="Control" parent="ModalCenter/StageModal/Margin/VBox/HBoxEnemy"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="EnemyPreviewSprite" type="Sprite2D" parent="ModalCenter/StageModal/Margin/VBox/HBoxEnemy/EnemyPreviewControl"]
+unique_name_in_owner = true
+position = Vector2(24, 24)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("4_enemy_tex")
+
+[node name="EnemyNameLabel" type="Label" parent="ModalCenter/StageModal/Margin/VBox/HBoxEnemy"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.65, 0.65, 1)
+theme_override_font_sizes/font_size = 14
+text = "Target: Forest Crab (45 HP)"
+
+[node name="LootListLabel" type="Label" parent="ModalCenter/StageModal/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 1, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "Guaranteed Loot Drops:
+🧪 1x Healing Fruit
+🍃 1x Ancient Leaf"
+
+[node name="StartBattleButton" type="Button" parent="ModalCenter/StageModal/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.9, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBox_start_btn")
+text = "⚔️ START WORD BATTLE"
+
+[node name="ArtifactModal" type="PanelContainer" parent="ModalCenter"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(480, 340)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_relic_card")
+
+[node name="Margin" type="MarginContainer" parent="ModalCenter/ArtifactModal"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 18
+
+[node name="VBox" type="VBoxContainer" parent="ModalCenter/ArtifactModal/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ArtifactTitleLabel" type="Label" parent="ModalCenter/ArtifactModal/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.3, 1)
+theme_override_font_sizes/font_size = 17
+text = "👑 FIRST SACRED ARTIFACT ACQUIRED! 👑"
+horizontal_alignment = 1
+
+[node name="HBoxIcon" type="CenterContainer" parent="ModalCenter/ArtifactModal/Margin/VBox"]
+layout_mode = 2
+
+[node name="IconControl" type="Control" parent="ModalCenter/ArtifactModal/Margin/VBox/HBoxIcon"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="ArtifactIconSprite" type="Sprite2D" parent="ModalCenter/ArtifactModal/Margin/VBox/HBoxIcon/IconControl"]
+unique_name_in_owner = true
+position = Vector2(32, 32)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("5_relic_tex")
+
+[node name="ArtifactNameLabel" type="Label" parent="ModalCenter/ArtifactModal/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 1, 0.7, 1)
+theme_override_font_sizes/font_size = 15
+text = "THE FOREST RELIC (ANCIENT HEART)"
+horizontal_alignment = 1
+
+[node name="ArtifactDescLabel" type="Label" parent="ModalCenter/ArtifactModal/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 0.9, 0.95)
+theme_override_font_sizes/font_size = 12
+text = "You defeated the Forest Guardian and reclaimed the 1st Sacred Artifact!
+
+The power of ancient nature flows through your vocabulary, unlocking the 'Forest's Blessing' relic spell in battle!
+
+Stage 2: The Sunken Coast is now open for exploration!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ProceedNextStageButton" type="Button" parent="ModalCenter/ArtifactModal/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBox_proceed_btn")
+text = "🌊 TRAVEL TO STAGE 2: THE SUNKEN COAST"

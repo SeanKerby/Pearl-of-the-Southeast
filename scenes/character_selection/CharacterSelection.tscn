@@ -1,0 +1,355 @@
+[gd_scene format=3 uid="uid://0wvdv7fyuce0"]
+
+[ext_resource type="Script" uid="uid://brycjqbfijtvn" path="res://scripts/ui/CharacterSelection.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bnycnsfpplwxk" path="res://assets/characters/mangyan/portrait.png" id="2_728fi"]
+[ext_resource type="Texture2D" uid="uid://cj02hgj1l46l" path="res://assets/characters/igorot/portrait.png" id="3_728fi"]
+[ext_resource type="Texture2D" uid="uid://bt21svaqstkcw" path="res://assets/characters/badjao/portrait.png" id="4_i06qh"]
+
+[node name="CharacterSelection" type="Control" unique_id=466324844]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1364048810]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07, 0.1, 0.13, 1)
+
+[node name="HeaderVBox" type="VBoxContainer" parent="." unique_id=2093292774]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 28.0
+offset_bottom = 90.0
+grow_horizontal = 2
+
+[node name="Title" type="Label" parent="HeaderVBox" unique_id=1775014929]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.55, 1)
+theme_override_font_sizes/font_size = 32
+text = "CHOOSE YOUR CHARACTER"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="HeaderVBox" unique_id=1502301479]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 0.75, 1)
+theme_override_font_sizes/font_size = 14
+text = "Select an explorer for the journey to find the Pearl of Southeast"
+horizontal_alignment = 1
+
+[node name="CardsContainer" type="HBoxContainer" parent="." unique_id=1693891177]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -580.0
+offset_top = -210.0
+offset_right = 580.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="MangyanCard" type="PanelContainer" parent="CardsContainer" unique_id=1715744480]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(350, 380)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="CardsContainer/MangyanCard" unique_id=1452868367]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="CardsContainer/MangyanCard/Margin" unique_id=1694009703]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Portrait" type="TextureRect" parent="CardsContainer/MangyanCard/Margin/VBox" unique_id=1359394230]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_728fi")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="CardsContainer/MangyanCard/Margin/VBox" unique_id=1773436225]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 20
+text = "Mangyan Explorer"
+horizontal_alignment = 1
+
+[node name="Role" type="Label" parent="CardsContainer/MangyanCard/Margin/VBox" unique_id=1823881488]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Role: Balanced Explorer"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CardsContainer/MangyanCard/Margin/VBox" unique_id=83468308]
+layout_mode = 2
+
+[node name="Stats" type="Label" parent="CardsContainer/MangyanCard/Margin/VBox" unique_id=1835418682]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "• Health: 100 HP
+• Speed: 150
+• Attack Damage: 20"
+
+[node name="Ability" type="Label" parent="CardsContainer/MangyanCard/Margin/VBox" unique_id=798541920]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "Special Ability:
+Balanced Movement & Exploration"
+autowrap_mode = 2
+
+[node name="Spacer" type="Control" parent="CardsContainer/MangyanCard/Margin/VBox" unique_id=1245255168]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SelectMangyanButton" type="Button" parent="CardsContainer/MangyanCard/Margin/VBox" unique_id=1538961054]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+text = "SELECT MANGYAN"
+
+[node name="IgorotCard" type="PanelContainer" parent="CardsContainer" unique_id=1440271073]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(350, 380)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="CardsContainer/IgorotCard" unique_id=473932865]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="CardsContainer/IgorotCard/Margin" unique_id=148444139]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Portrait" type="TextureRect" parent="CardsContainer/IgorotCard/Margin/VBox" unique_id=1432068871]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_728fi")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="CardsContainer/IgorotCard/Margin/VBox" unique_id=1171112618]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.4, 1)
+theme_override_font_sizes/font_size = 20
+text = "Igorot Explorer"
+horizontal_alignment = 1
+
+[node name="Role" type="Label" parent="CardsContainer/IgorotCard/Margin/VBox" unique_id=201627150]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Role: Resilient Explorer"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CardsContainer/IgorotCard/Margin/VBox" unique_id=673958917]
+layout_mode = 2
+
+[node name="Stats" type="Label" parent="CardsContainer/IgorotCard/Margin/VBox" unique_id=1742224237]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "• Health: 130 HP
+• Speed: 130
+• Attack Damage: 25"
+
+[node name="Ability" type="Label" parent="CardsContainer/IgorotCard/Margin/VBox" unique_id=2115212931]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "Special Ability:
+Higher Hazard & Environmental Resistance"
+autowrap_mode = 2
+
+[node name="Spacer" type="Control" parent="CardsContainer/IgorotCard/Margin/VBox" unique_id=376723329]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SelectIgorotButton" type="Button" parent="CardsContainer/IgorotCard/Margin/VBox" unique_id=686500607]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+text = "SELECT IGOROT"
+
+[node name="BadjaoCard" type="PanelContainer" parent="CardsContainer" unique_id=243293059]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(350, 380)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="CardsContainer/BadjaoCard" unique_id=1202186986]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="CardsContainer/BadjaoCard/Margin" unique_id=484321381]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Portrait" type="TextureRect" parent="CardsContainer/BadjaoCard/Margin/VBox" unique_id=47502937]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("4_i06qh")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="CardsContainer/BadjaoCard/Margin/VBox" unique_id=1200690219]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Badjao Explorer"
+horizontal_alignment = 1
+
+[node name="Role" type="Label" parent="CardsContainer/BadjaoCard/Margin/VBox" unique_id=388387932]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Role: Fast Explorer"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CardsContainer/BadjaoCard/Margin/VBox" unique_id=1113604568]
+layout_mode = 2
+
+[node name="Stats" type="Label" parent="CardsContainer/BadjaoCard/Margin/VBox" unique_id=666474237]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "• Health: 90 HP
+• Speed: 175
+• Attack Damage: 18"
+
+[node name="Ability" type="Label" parent="CardsContainer/BadjaoCard/Margin/VBox" unique_id=702361186]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Special Ability:
+Improved Coastal Navigation & High Agility"
+autowrap_mode = 2
+
+[node name="Spacer" type="Control" parent="CardsContainer/BadjaoCard/Margin/VBox" unique_id=1216085534]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SelectBadjaoButton" type="Button" parent="CardsContainer/BadjaoCard/Margin/VBox" unique_id=691697823]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+text = "SELECT BADJAO"
+
+[node name="BottomBar" type="VBoxContainer" parent="." unique_id=216809010]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="SelectedInfoLabel" type="Label" parent="BottomBar" unique_id=1093212015]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "Selected: Mangyan Explorer"
+horizontal_alignment = 1
+
+[node name="ButtonsHBox" type="HBoxContainer" parent="BottomBar" unique_id=478430236]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="BackButton" type="Button" parent="BottomBar/ButtonsHBox" unique_id=2143466921]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 42)
+layout_mode = 2
+text = "MAIN MENU"
+
+[node name="StartButton" type="Button" parent="BottomBar/ButtonsHBox" unique_id=377568949]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "START ADVENTURE"
+
+[node name="StoryModal" type="PanelContainer" parent="." unique_id=1018584568]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -200.0
+offset_right = 320.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="StoryModal" unique_id=605999034]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="StoryModal/Margin" unique_id=429868451]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="StoryModal/Margin/VBox" unique_id=550301972]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.5, 1)
+theme_override_font_sizes/font_size = 22
+text = "THE PEARL OF SOUTHEAST"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="StoryModal/Margin/VBox" unique_id=89199206]
+layout_mode = 2
+
+[node name="StoryText" type="Label" parent="StoryModal/Margin/VBox" unique_id=538783790]
+layout_mode = 2
+theme_override_constants/line_spacing = 6
+theme_override_font_sizes/font_size = 14
+text = "Long ago, three sacred relics maintained harmony across the islands: the Forest Relic, the Pearl Shell, and the Ancient Stone.
+
+Scattered across ancient mountains, coastal isles, and forgotten ruins, they await a courageous explorer.
+
+Your quest: Journey through the three realms, recover all three artifacts, and bring them to the Final Restoration Sanctuary to restore the ancient bond."
+autowrap_mode = 2
+
+[node name="Spacer" type="Control" parent="StoryModal/Margin/VBox" unique_id=1631454624]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ProceedStoryButton" type="Button" parent="StoryModal/Margin/VBox" unique_id=404809713]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "BEGIN JOURNEY"

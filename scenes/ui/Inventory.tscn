@@ -1,0 +1,172 @@
+﻿[gd_scene load_steps=2 format=3 uid="uid://bj4r2k8xvy5w1"]
+
+[ext_resource type="Script" path="res://scripts/ui/Inventory.gd" id="1_inv"]
+
+[node name="Inventory" type="CanvasLayer"]
+script = ExtResource("1_inv")
+
+[node name="InventoryPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -240.0
+offset_right = 280.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="InventoryPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 22
+
+[node name="VBox" type="VBoxContainer" parent="InventoryPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleRow" type="HBoxContainer" parent="InventoryPanel/Margin/VBox"]
+layout_mode = 2
+
+[node name="InvTitle" type="Label" parent="InventoryPanel/Margin/VBox/TitleRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.95, 0.85, 0.45, 1)
+theme_override_font_sizes/font_size = 26
+text = "INVENTORY"
+
+[node name="CloseButton" type="Button" parent="InventoryPanel/Margin/VBox/TitleRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+text = "X"
+
+[node name="ArtifactCountLabel" type="Label" parent="InventoryPanel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 0.85, 1)
+theme_override_font_sizes/font_size = 16
+text = "ARTIFACTS FOUND: 0 / 3"
+
+[node name="HSeparator" type="HSeparator" parent="InventoryPanel/Margin/VBox"]
+layout_mode = 2
+
+[node name="ForestRelicRow" type="HBoxContainer" parent="InventoryPanel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="RelicIcon" type="Label" parent="InventoryPanel/Margin/VBox/ForestRelicRow"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.85, 0.35, 1)
+theme_override_font_sizes/font_size = 24
+text = "🌿"
+
+[node name="RelicInfo" type="VBoxContainer" parent="InventoryPanel/Margin/VBox/ForestRelicRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RelicName" type="Label" parent="InventoryPanel/Margin/VBox/ForestRelicRow/RelicInfo"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Forest Relic"
+
+[node name="RelicDesc" type="Label" parent="InventoryPanel/Margin/VBox/ForestRelicRow/RelicInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.7, 1)
+theme_override_font_sizes/font_size = 12
+text = "A fictional ancient relic from the highland forest."
+autowrap_mode = 2
+
+[node name="ForestRelicStatus" type="Label" parent="InventoryPanel/Margin/VBox/ForestRelicRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "✘ NOT FOUND"
+horizontal_alignment = 2
+
+[node name="HSeparator2" type="HSeparator" parent="InventoryPanel/Margin/VBox"]
+layout_mode = 2
+
+[node name="PearlShellRow" type="HBoxContainer" parent="InventoryPanel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PearlIcon" type="Label" parent="InventoryPanel/Margin/VBox/PearlShellRow"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.75, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "🐚"
+
+[node name="PearlInfo" type="VBoxContainer" parent="InventoryPanel/Margin/VBox/PearlShellRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PearlName" type="Label" parent="InventoryPanel/Margin/VBox/PearlShellRow/PearlInfo"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Pearl Shell"
+
+[node name="PearlDesc" type="Label" parent="InventoryPanel/Margin/VBox/PearlShellRow/PearlInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.7, 1)
+theme_override_font_sizes/font_size = 12
+text = "A lustrous shell from the coastal island waters."
+autowrap_mode = 2
+
+[node name="PearlShellStatus" type="Label" parent="InventoryPanel/Margin/VBox/PearlShellRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "✘ NOT FOUND"
+horizontal_alignment = 2
+
+[node name="HSeparator3" type="HSeparator" parent="InventoryPanel/Margin/VBox"]
+layout_mode = 2
+
+[node name="AncientStoneRow" type="HBoxContainer" parent="InventoryPanel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="StoneIcon" type="Label" parent="InventoryPanel/Margin/VBox/AncientStoneRow"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.35, 1)
+theme_override_font_sizes/font_size = 24
+text = "🪨"
+
+[node name="StoneInfo" type="VBoxContainer" parent="InventoryPanel/Margin/VBox/AncientStoneRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StoneName" type="Label" parent="InventoryPanel/Margin/VBox/AncientStoneRow/StoneInfo"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Ancient Stone"
+
+[node name="StoneDesc" type="Label" parent="InventoryPanel/Margin/VBox/AncientStoneRow/StoneInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.7, 1)
+theme_override_font_sizes/font_size = 12
+text = "An intricately carved stone from the ancient ruins."
+autowrap_mode = 2
+
+[node name="AncientStoneStatus" type="Label" parent="InventoryPanel/Margin/VBox/AncientStoneRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "✘ NOT FOUND"
+horizontal_alignment = 2

@@ -1,0 +1,218 @@
+[gd_scene format=3 uid="uid://dsyi62umu57di"]
+
+[ext_resource type="PackedScene" uid="uid://dp6m0xrq2ty5l" path="res://scenes/ui/HUD.tscn" id="1_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="2_pause"]
+[ext_resource type="Script" uid="uid://dtjdarnbjouy7" path="res://scripts/systems/Level1_Forest.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://chgelk81yeg4o" path="res://assets/environments/forest/level1_map.png" id="4_map_tex"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/Boar.tscn" id="6_boar"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/Crab.tscn" id="7_crab"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/Spirit.tscn" id="8_spirit"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/ForestGuardianBoss.tscn" id="9_boss"]
+[ext_resource type="PackedScene" path="res://scenes/items/Chest.tscn" id="10_chest"]
+[ext_resource type="PackedScene" path="res://scenes/items/CollectibleItem.tscn" id="11_collectible"]
+[ext_resource type="Texture2D" uid="uid://b4fgumwj24bba" path="res://assets/items/ancient_leaf.png" id="16_tex_leaf"]
+[ext_resource type="Texture2D" uid="uid://bhl24m8n56r85" path="res://assets/items/lost_shell.png" id="17_tex_shell"]
+[ext_resource type="Texture2D" uid="uid://dnpxftovcxoco" path="res://assets/items/stone_fragment.png" id="18_tex_stone"]
+
+[sub_resource type="RectangleShape2D" id="Shape_world_h"]
+size = Vector2(1040, 16)
+
+[sub_resource type="RectangleShape2D" id="Shape_world_v"]
+size = Vector2(16, 595)
+
+[sub_resource type="RectangleShape2D" id="Shape_start_hut"]
+size = Vector2(50, 36)
+
+[sub_resource type="RectangleShape2D" id="Shape_green_hut"]
+size = Vector2(50, 36)
+
+[sub_resource type="RectangleShape2D" id="Shape_red_hut"]
+size = Vector2(50, 36)
+
+[sub_resource type="RectangleShape2D" id="Shape_blue_hut"]
+size = Vector2(46, 36)
+
+[sub_resource type="RectangleShape2D" id="Shape_ocean"]
+size = Vector2(240, 130)
+
+[sub_resource type="RectangleShape2D" id="Shape_cliff_top"]
+size = Vector2(340, 40)
+
+[sub_resource type="CircleShape2D" id="Shape_exit"]
+radius = 36.0
+
+[node name="Level1_Forest" type="Node2D" unique_id=1174021915]
+script = ExtResource("3_script")
+
+[node name="MapVisual" type="Sprite2D" parent="." unique_id=1137998062]
+z_index = -5
+position = Vector2(509, 285.5)
+texture = ExtResource("4_map_tex")
+
+[node name="WorldBounds" type="Node2D" parent="." unique_id=155151517]
+
+[node name="Top" type="StaticBody2D" parent="WorldBounds" unique_id=984947449]
+position = Vector2(509, -8)
+
+[node name="Col" type="CollisionShape2D" parent="WorldBounds/Top" unique_id=401639013]
+shape = SubResource("Shape_world_h")
+
+[node name="Bottom" type="StaticBody2D" parent="WorldBounds" unique_id=721991594]
+position = Vector2(509, 579)
+
+[node name="Col" type="CollisionShape2D" parent="WorldBounds/Bottom" unique_id=946791800]
+shape = SubResource("Shape_world_h")
+
+[node name="Left" type="StaticBody2D" parent="WorldBounds" unique_id=1502222426]
+position = Vector2(-8, 285)
+
+[node name="Col" type="CollisionShape2D" parent="WorldBounds/Left" unique_id=1920915233]
+shape = SubResource("Shape_world_v")
+
+[node name="Right" type="StaticBody2D" parent="WorldBounds" unique_id=1400173721]
+position = Vector2(1026, 285)
+
+[node name="Col" type="CollisionShape2D" parent="WorldBounds/Right" unique_id=1288442024]
+shape = SubResource("Shape_world_v")
+
+[node name="Obstacles" type="Node2D" parent="." unique_id=756369992]
+
+[node name="StartHut" type="StaticBody2D" parent="Obstacles" unique_id=1816173282]
+position = Vector2(75, 110)
+
+[node name="Col" type="CollisionShape2D" parent="Obstacles/StartHut" unique_id=1799384451]
+shape = SubResource("Shape_start_hut")
+
+[node name="GreenHut" type="StaticBody2D" parent="Obstacles" unique_id=127313715]
+position = Vector2(325, 215)
+
+[node name="Col" type="CollisionShape2D" parent="Obstacles/GreenHut" unique_id=1823684171]
+shape = SubResource("Shape_green_hut")
+
+[node name="RedHut" type="StaticBody2D" parent="Obstacles" unique_id=1373334476]
+position = Vector2(485, 215)
+
+[node name="Col" type="CollisionShape2D" parent="Obstacles/RedHut" unique_id=2017679016]
+shape = SubResource("Shape_red_hut")
+
+[node name="BlueHut" type="StaticBody2D" parent="Obstacles" unique_id=1401375518]
+position = Vector2(605, 285)
+
+[node name="Col" type="CollisionShape2D" parent="Obstacles/BlueHut" unique_id=838240607]
+shape = SubResource("Shape_blue_hut")
+
+[node name="OceanBay" type="StaticBody2D" parent="Obstacles" unique_id=1190069563]
+position = Vector2(160, 520)
+
+[node name="Col" type="CollisionShape2D" parent="Obstacles/OceanBay" unique_id=1002258240]
+shape = SubResource("Shape_ocean")
+
+[node name="TopCliff" type="StaticBody2D" parent="Obstacles" unique_id=528861787]
+position = Vector2(180, 20)
+
+[node name="Col" type="CollisionShape2D" parent="Obstacles/TopCliff" unique_id=1505822967]
+shape = SubResource("Shape_cliff_top")
+
+[node name="Enemies" type="Node2D" parent="." unique_id=675558385]
+
+[node name="Boar1" parent="Enemies" unique_id=1543806969 instance=ExtResource("6_boar")]
+position = Vector2(50, 420)
+
+[node name="Boar2" parent="Enemies" unique_id=822548749 instance=ExtResource("6_boar")]
+position = Vector2(90, 320)
+
+[node name="Boar3" parent="Enemies" unique_id=1701558502 instance=ExtResource("6_boar")]
+position = Vector2(530, 110)
+
+[node name="Boar4" parent="Enemies" unique_id=456168686 instance=ExtResource("6_boar")]
+position = Vector2(930, 500)
+
+[node name="Crab1" parent="Enemies" unique_id=1035771648 instance=ExtResource("7_crab")]
+position = Vector2(125, 230)
+
+[node name="Crab2" parent="Enemies" unique_id=75621758 instance=ExtResource("7_crab")]
+position = Vector2(495, 545)
+
+[node name="Crab3" parent="Enemies" unique_id=1602345137 instance=ExtResource("7_crab")]
+position = Vector2(405, 570)
+
+[node name="Crab4" parent="Enemies" unique_id=1830594487 instance=ExtResource("7_crab")]
+position = Vector2(820, 260)
+
+[node name="Spirit1" parent="Enemies" unique_id=1587442079 instance=ExtResource("8_spirit")]
+position = Vector2(355, 90)
+
+[node name="Spirit2" parent="Enemies" unique_id=1317274919 instance=ExtResource("8_spirit")]
+position = Vector2(725, 435)
+
+[node name="Spirit3" parent="Enemies" unique_id=1388217970 instance=ExtResource("8_spirit")]
+position = Vector2(970, 205)
+
+[node name="ForestGuardianBoss" parent="Enemies" unique_id=891913968 instance=ExtResource("9_boss")]
+position = Vector2(855, 95)
+
+[node name="Collectibles" type="Node2D" parent="." unique_id=1316917455]
+
+[node name="Leaf1" parent="Collectibles" unique_id=1758184667 instance=ExtResource("11_collectible")]
+position = Vector2(468, 305)
+item_id = "ancient_leaf_1"
+item_texture = ExtResource("16_tex_leaf")
+
+[node name="Leaf2" parent="Collectibles" unique_id=1026324989 instance=ExtResource("11_collectible")]
+position = Vector2(845, 300)
+item_id = "ancient_leaf_2"
+item_texture = ExtResource("16_tex_leaf")
+
+[node name="LostShell1" parent="Collectibles" unique_id=1075734045 instance=ExtResource("11_collectible")]
+position = Vector2(780, 375)
+item_id = "lost_shell_1"
+item_name = "Lost Shell"
+item_texture = ExtResource("17_tex_shell")
+
+[node name="LostShell2" parent="Collectibles" unique_id=1008635642 instance=ExtResource("11_collectible")]
+position = Vector2(880, 510)
+item_id = "lost_shell_2"
+item_name = "Lost Shell"
+item_texture = ExtResource("17_tex_shell")
+
+[node name="StoneFragment1" parent="Collectibles" unique_id=768817501 instance=ExtResource("11_collectible")]
+position = Vector2(395, 245)
+item_id = "stone_fragment_1"
+item_name = "Stone Fragment"
+item_texture = ExtResource("18_tex_stone")
+
+[node name="StoneFragment2" parent="Collectibles" unique_id=1939885889 instance=ExtResource("11_collectible")]
+position = Vector2(750, 350)
+item_id = "stone_fragment_2"
+item_name = "Stone Fragment"
+item_texture = ExtResource("18_tex_stone")
+
+[node name="Items" type="Node2D" parent="." unique_id=687469008]
+
+[node name="ArtifactChest" parent="Items" unique_id=1257560987 instance=ExtResource("10_chest")]
+position = Vector2(870, 310)
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1506752419]
+position = Vector2(100, 200)
+
+[node name="ExitArea" type="Area2D" parent="." unique_id=1728182455]
+position = Vector2(900, 160)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea" unique_id=537781670]
+shape = SubResource("Shape_exit")
+
+[node name="ExitLabel" type="Label" parent="ExitArea" unique_id=286262813]
+offset_left = -50.0
+offset_top = -26.0
+offset_right = 50.0
+offset_bottom = -8.0
+theme_override_colors/font_color = Color(0.6, 1, 0.5, 1)
+theme_override_font_sizes/font_size = 11
+text = "→ To Level 2"
+horizontal_alignment = 1
+
+[node name="HUD" parent="." unique_id=617278281 instance=ExtResource("1_hud")]
+
+[node name="PauseMenu" parent="." unique_id=1395174289 instance=ExtResource("2_pause")]

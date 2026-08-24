@@ -1,0 +1,234 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp6m0xrq2ty5l"]
+
+[ext_resource type="Script" path="res://scripts/ui/HUD.gd" id="1_hud"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_bg"]
+bg_color = Color(0.15, 0.15, 0.15, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_fill"]
+bg_color = Color(0.85, 0.2, 0.2, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 18
+
+[node name="TopLeft" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 6
+
+[node name="HPLabel" type="Label" parent="Margin/TopLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 15
+text = "HP: 100 / 100"
+
+[node name="HPBar" type="ProgressBar" parent="Margin/TopLeft"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 16)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_hp_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hp_fill")
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="TopRight" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="ArtifactsPanel" type="PanelContainer" parent="Margin/TopRight"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/TopRight/ArtifactsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="ArtifactsLabel" type="Label" parent="Margin/TopRight/ArtifactsPanel/Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.45, 1)
+theme_override_font_sizes/font_size = 15
+text = "ARTIFACTS: 0 / 3"
+
+[node name="CollectiblesPanel" type="PanelContainer" parent="Margin/TopRight"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/TopRight/CollectiblesPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 4
+
+[node name="CollectiblesLabel" type="Label" parent="Margin/TopRight/CollectiblesPanel/Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 1, 0.75, 1)
+theme_override_font_sizes/font_size = 13
+text = "🍃0  🐚0  🪨0"
+
+[node name="BottomLeft" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="ObjectivePanel" type="PanelContainer" parent="Margin/BottomLeft"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/BottomLeft/ObjectivePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="ObjectiveLabel" type="Label" parent="Margin/BottomLeft/ObjectivePanel/Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.95, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "OBJECTIVE:
+Explore the mountain forest and find the Forest Relic"
+
+[node name="BottomRight" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="ControlsPanel" type="PanelContainer" parent="Margin/BottomRight"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/BottomRight/ControlsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="ControlsLabel" type="Label" parent="Margin/BottomRight/ControlsPanel/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 0.8, 0.8)
+theme_override_font_sizes/font_size = 12
+text = "WASD: Move  |  E: Interact  |  I: Inventory  |  ESC: Pause"
+
+[node name="NotificationCenter" type="CenterContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -140.0
+offset_right = 200.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NotificationPanel" type="PanelContainer" parent="NotificationCenter"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="NotificationCenter/NotificationPanel"]
+layout_mode = 2
+[node name="NotificationLabel" type="Label" parent="NotificationCenter/NotificationPanel/Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.4, 1)
+theme_override_font_sizes/font_size = 18
+text = "Artifact Acquired!"
+horizontal_alignment = 1
+
+[node name="DialogCenter" type="CenterContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -340.0
+offset_top = -140.0
+offset_right = 340.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="DialogPanel" type="PanelContainer" parent="DialogCenter"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(680, 110)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="DialogCenter/DialogPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 12
+
+[node name="HBox" type="HBoxContainer" parent="DialogCenter/DialogPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SpeakerPortrait" type="TextureRect" parent="DialogCenter/DialogPanel/Margin/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 80)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBox" type="VBoxContainer" parent="DialogCenter/DialogPanel/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="SpeakerLabel" type="Label" parent="DialogCenter/DialogPanel/Margin/HBox/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 16
+text = "Village Elder"
+
+[node name="DialogText" type="Label" parent="DialogCenter/DialogPanel/Margin/HBox/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 13
+text = "Welcome, explorer! Find the artifact in the forest."
+autowrap_mode = 3
+
+[node name="PromptHint" type="Label" parent="DialogCenter/DialogPanel/Margin/HBox/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.8, 0.7, 0.8)
+theme_override_font_sizes/font_size = 10
+text = "[Press E to continue]"
+horizontal_alignment = 2
+
+

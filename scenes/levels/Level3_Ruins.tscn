@@ -1,0 +1,301 @@
+﻿[gd_scene load_steps=17 format=3 uid="uid://dm2q9p8rxw6k1"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="1_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="2_pause"]
+[ext_resource type="Script" path="res://scripts/systems/Level3_Ruins.gd" id="3_script"]
+[ext_resource type="Script" path="res://scripts/items/artifact.gd" id="4_artifact"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="5_enemy"]
+
+[sub_resource type="RectangleShape2D" id="Shape_wall_h"]
+size = Vector2(768, 16)
+
+[sub_resource type="RectangleShape2D" id="Shape_wall_v"]
+size = Vector2(16, 768)
+
+[sub_resource type="RectangleShape2D" id="Shape_ruins_wall"]
+size = Vector2(48, 160)
+
+[sub_resource type="RectangleShape2D" id="Shape_ruins_wall2"]
+size = Vector2(160, 48)
+
+[sub_resource type="RectangleShape2D" id="Shape_hazard"]
+size = Vector2(80, 16)
+
+[sub_resource type="CircleShape2D" id="Shape_artifact"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="Shape_exit"]
+radius = 30.0
+
+[sub_resource type="CapsuleShape2D" id="Shape_enemy"]
+radius = 11.0
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="Shape_detect"]
+radius = 130.0
+
+[sub_resource type="CircleShape2D" id="Shape_boss_detect"]
+radius = 160.0
+
+[sub_resource type="SpriteFrames" id="SF_ruins_enemy"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"walk_down",
+"speed": 4.0
+}]
+
+[node name="Level3_Ruins" type="Node2D"]
+script = ExtResource("3_script")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+size = Vector2(768, 768)
+color = Color(0.09, 0.07, 0.1, 1)
+
+[node name="WorldBounds" type="Node2D" parent="."]
+
+[node name="TopWall" type="StaticBody2D" parent="WorldBounds"]
+position = Vector2(384, -8)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/TopWall"]
+shape = SubResource("Shape_wall_h")
+
+[node name="BottomWall" type="StaticBody2D" parent="WorldBounds"]
+position = Vector2(384, 776)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/BottomWall"]
+shape = SubResource("Shape_wall_h")
+
+[node name="LeftWall" type="StaticBody2D" parent="WorldBounds"]
+position = Vector2(-8, 384)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/LeftWall"]
+shape = SubResource("Shape_wall_v")
+
+[node name="RightWall" type="StaticBody2D" parent="WorldBounds"]
+position = Vector2(776, 384)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/RightWall"]
+shape = SubResource("Shape_wall_v")
+
+[node name="CaveEntrance" type="Node2D" parent="."]
+
+[node name="CaveFloor" type="ColorRect" parent="CaveEntrance"]
+position = Vector2(264, 640)
+size = Vector2(240, 112)
+color = Color(0.2, 0.18, 0.22, 1)
+
+[node name="CaveLabel" type="Label" parent="CaveEntrance"]
+position = Vector2(298, 680)
+theme_override_colors/font_color = Color(0.65, 0.6, 0.75, 1)
+theme_override_font_sizes/font_size = 11
+text = "CAVE ENTRANCE"
+
+[node name="StonePath" type="Node2D" parent="."]
+
+[node name="PathFloor" type="ColorRect" parent="StonePath"]
+position = Vector2(304, 300)
+size = Vector2(160, 360)
+color = Color(0.25, 0.22, 0.28, 1)
+
+[node name="RuinsArea" type="Node2D" parent="."]
+
+[node name="RuinsFloor" type="ColorRect" parent="RuinsArea"]
+position = Vector2(140, 80)
+size = Vector2(480, 240)
+color = Color(0.28, 0.24, 0.3, 1)
+
+[node name="RuinsLabel" type="Label" parent="RuinsArea"]
+position = Vector2(290, 120)
+theme_override_colors/font_color = Color(0.85, 0.75, 0.45, 1)
+theme_override_font_sizes/font_size = 12
+text = "ANCIENT RUINS"
+
+[node name="RuinsWall1" type="StaticBody2D" parent="RuinsArea"]
+position = Vector2(150, 180)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RuinsArea/RuinsWall1"]
+shape = SubResource("Shape_ruins_wall")
+
+[node name="WallVisual1" type="ColorRect" parent="RuinsArea"]
+position = Vector2(126, 100)
+size = Vector2(48, 160)
+color = Color(0.38, 0.32, 0.42, 1)
+
+[node name="RuinsWall2" type="StaticBody2D" parent="RuinsArea"]
+position = Vector2(550, 180)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RuinsArea/RuinsWall2"]
+shape = SubResource("Shape_ruins_wall")
+
+[node name="WallVisual2" type="ColorRect" parent="RuinsArea"]
+position = Vector2(526, 100)
+size = Vector2(48, 160)
+color = Color(0.38, 0.32, 0.42, 1)
+
+[node name="Torches" type="Node2D" parent="."]
+
+[node name="Torch1" type="Label" parent="Torches"]
+position = Vector2(155, 115)
+theme_override_font_sizes/font_size = 18
+text = "🔥"
+
+[node name="Torch2" type="Label" parent="Torches"]
+position = Vector2(575, 115)
+theme_override_font_sizes/font_size = 18
+text = "🔥"
+
+[node name="Torch3" type="Label" parent="Torches"]
+position = Vector2(300, 300)
+theme_override_font_sizes/font_size = 18
+text = "🔥"
+
+[node name="Torch4" type="Label" parent="Torches"]
+position = Vector2(435, 300)
+theme_override_font_sizes/font_size = 18
+text = "🔥"
+
+[node name="HazardZone" type="Node2D" parent="."]
+
+[node name="HazardVisual" type="ColorRect" parent="HazardZone"]
+position = Vector2(200, 420)
+size = Vector2(80, 16)
+color = Color(0.85, 0.3, 0.1, 0.7)
+
+[node name="HazardLabel" type="Label" parent="HazardZone"]
+position = Vector2(190, 404)
+theme_override_colors/font_color = Color(1, 0.5, 0.2, 1)
+theme_override_font_sizes/font_size = 9
+text = "⚠ HAZARD"
+
+[node name="HazardBody" type="StaticBody2D" parent="HazardZone"]
+position = Vector2(240, 428)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardZone/HazardBody"]
+shape = SubResource("Shape_hazard")
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="RuinsGuardian1" type="CharacterBody2D" parent="Enemies"]
+position = Vector2(300, 400)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("5_enemy")
+max_health = 70
+move_speed = 60.0
+attack_damage = 14
+detection_range = 130.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemies/RuinsGuardian1"]
+sprite_frames = SubResource("SF_ruins_enemy")
+modulate = Color(0.6, 0.45, 0.75, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/RuinsGuardian1"]
+position = Vector2(0, 8)
+shape = SubResource("Shape_enemy")
+
+[node name="DetectionArea" type="Area2D" parent="Enemies/RuinsGuardian1"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/RuinsGuardian1/DetectionArea"]
+shape = SubResource("Shape_detect")
+
+[node name="AttackArea" type="Area2D" parent="Enemies/RuinsGuardian1"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/RuinsGuardian1/AttackArea"]
+shape = SubResource("Shape_detect")
+
+[node name="BossRuinsGuardian" type="CharacterBody2D" parent="Enemies"]
+position = Vector2(384, 200)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("5_enemy")
+max_health = 150
+move_speed = 50.0
+attack_damage = 18
+detection_range = 160.0
+patrol_radius = 60.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemies/BossRuinsGuardian"]
+sprite_frames = SubResource("SF_ruins_enemy")
+modulate = Color(0.8, 0.2, 0.9, 1)
+scale = Vector2(1.4, 1.4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/BossRuinsGuardian"]
+position = Vector2(0, 8)
+shape = SubResource("Shape_enemy")
+
+[node name="DetectionArea" type="Area2D" parent="Enemies/BossRuinsGuardian"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/BossRuinsGuardian/DetectionArea"]
+shape = SubResource("Shape_boss_detect")
+
+[node name="AttackArea" type="Area2D" parent="Enemies/BossRuinsGuardian"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/BossRuinsGuardian/AttackArea"]
+shape = SubResource("Shape_boss_detect")
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="AncientStone" type="Area2D" parent="Items"]
+position = Vector2(384, 130)
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("4_artifact")
+artifact_id = "ancient_stone"
+artifact_name = "Ancient Stone"
+
+[node name="Sprite2D" type="Sprite2D" parent="Items/AncientStone"]
+modulate = Color(0.8, 0.55, 0.95, 1)
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Items/AncientStone"]
+shape = SubResource("Shape_artifact")
+
+[node name="Label" type="Label" parent="Items/AncientStone"]
+position = Vector2(-44, -26)
+size = Vector2(88, 18)
+theme_override_colors/font_color = Color(0.85, 0.65, 1.0, 1)
+theme_override_font_sizes/font_size = 9
+text = "Ancient Stone"
+horizontal_alignment = 1
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(384, 700)
+
+[node name="ExitArea" type="Area2D" parent="."]
+position = Vector2(384, 730)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+shape = SubResource("Shape_exit")
+
+[node name="ExitLabel" type="Label" parent="ExitArea"]
+position = Vector2(-60, -28)
+size = Vector2(120, 18)
+theme_override_colors/font_color = Color(0.6, 1.0, 0.55, 1)
+theme_override_font_sizes/font_size = 11
+text = "→ Final Sanctuary"
+horizontal_alignment = 1
+
+[node name="HUD" type="CanvasLayer" parent="."]
+instance = ExtResource("1_hud")
+
+[node name="PauseMenu" type="Control" parent="."]
+instance = ExtResource("2_pause")

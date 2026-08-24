@@ -1,0 +1,26 @@
+﻿[gd_scene load_steps=3 format=3 uid="uid://collectible_generic_item"]
+
+[ext_resource type="Script" path="res://scripts/items/collectible_item.gd" id="1_item"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_col"]
+radius = 16.0
+
+[node name="CollectibleItem" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_item")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_col")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = -6.0
+theme_override_colors/font_color = Color(0.9, 1.0, 0.7, 0.9)
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1

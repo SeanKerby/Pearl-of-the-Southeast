@@ -1,0 +1,407 @@
+﻿[gd_scene load_steps=22 format=3 uid="uid://bm9k5r7vxq2y4"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="1_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="2_pause"]
+[ext_resource type="Script" path="res://scripts/systems/Level2_Coastal.gd" id="3_script"]
+[ext_resource type="Script" path="res://scripts/items/artifact.gd" id="4_artifact"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="5_enemy"]
+
+[sub_resource type="RectangleShape2D" id="Shape_wall_h"]
+size = Vector2(1024, 16)
+
+[sub_resource type="RectangleShape2D" id="Shape_wall_v"]
+size = Vector2(16, 896)
+
+[sub_resource type="RectangleShape2D" id="Shape_dock1"]
+size = Vector2(96, 16)
+
+[sub_resource type="RectangleShape2D" id="Shape_dock2"]
+size = Vector2(80, 16)
+
+[sub_resource type="RectangleShape2D" id="Shape_island"]
+size = Vector2(160, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_cove"]
+size = Vector2(80, 64)
+
+[sub_resource type="RectangleShape2D" id="Shape_ship"]
+size = Vector2(80, 48)
+
+[sub_resource type="CircleShape2D" id="Shape_artifact"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="Shape_exit"]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id="Shape_shrine"]
+radius = 36.0
+
+[sub_resource type="CapsuleShape2D" id="Shape_enemy"]
+radius = 11.0
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="Shape_detect"]
+radius = 120.0
+
+[sub_resource type="SpriteFrames" id="SF_coastal_enemy"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"walk_down",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="Shape_bridge1"]
+size = Vector2(32, 96)
+
+[sub_resource type="RectangleShape2D" id="Shape_bridge2"]
+size = Vector2(32, 80)
+
+[node name="Level2_Coastal" type="Node2D"]
+script = ExtResource("3_script")
+
+[node name="WorldBounds" type="Node2D" parent="."]
+
+[node name="TopWall" type="StaticBody2D" parent="WorldBounds"]
+position = Vector2(512, -8)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/TopWall"]
+shape = SubResource("Shape_wall_h")
+
+[node name="BottomWall" type="StaticBody2D" parent="WorldBounds"]
+position = Vector2(512, 904)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/BottomWall"]
+shape = SubResource("Shape_wall_h")
+
+[node name="LeftWall" type="StaticBody2D" parent="WorldBounds"]
+position = Vector2(-8, 448)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/LeftWall"]
+shape = SubResource("Shape_wall_v")
+
+[node name="RightWall" type="StaticBody2D" parent="WorldBounds"]
+position = Vector2(1032, 448)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/RightWall"]
+shape = SubResource("Shape_wall_v")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+position = Vector2(0, 0)
+size = Vector2(1024, 896)
+color = Color(0.08, 0.28, 0.55, 1)
+
+[node name="CoastalVillage" type="Node2D" parent="."]
+
+[node name="VillageGround" type="ColorRect" parent="CoastalVillage"]
+position = Vector2(80, 680)
+size = Vector2(340, 200)
+color = Color(0.78, 0.7, 0.45, 1)
+
+[node name="VillageLabel" type="Label" parent="CoastalVillage"]
+position = Vector2(120, 740)
+theme_override_colors/font_color = Color(0.3, 0.2, 0.1, 1)
+theme_override_font_sizes/font_size = 12
+text = "COASTAL VILLAGE"
+
+[node name="Hut1" type="ColorRect" parent="CoastalVillage"]
+position = Vector2(96, 696)
+size = Vector2(56, 48)
+color = Color(0.55, 0.38, 0.22, 1)
+
+[node name="Hut2" type="ColorRect" parent="CoastalVillage"]
+position = Vector2(200, 700)
+size = Vector2(48, 44)
+color = Color(0.55, 0.38, 0.22, 1)
+
+[node name="Hut3" type="ColorRect" parent="CoastalVillage"]
+position = Vector2(300, 694)
+size = Vector2(52, 46)
+color = Color(0.55, 0.38, 0.22, 1)
+
+[node name="BeachDock" type="Node2D" parent="."]
+
+[node name="BeachGround" type="ColorRect" parent="BeachDock"]
+position = Vector2(360, 580)
+size = Vector2(280, 160)
+color = Color(0.9, 0.82, 0.55, 1)
+
+[node name="BeachLabel" type="Label" parent="BeachDock"]
+position = Vector2(400, 630)
+theme_override_colors/font_color = Color(0.35, 0.25, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+text = "BEACH / DOCK"
+
+[node name="Dock1" type="StaticBody2D" parent="BeachDock"]
+position = Vector2(560, 580)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BeachDock/Dock1"]
+shape = SubResource("Shape_dock1")
+
+[node name="DockVisual1" type="ColorRect" parent="BeachDock"]
+position = Vector2(512, 572)
+size = Vector2(96, 16)
+color = Color(0.5, 0.32, 0.18, 1)
+
+[node name="DockVisual2" type="ColorRect" parent="BeachDock"]
+position = Vector2(512, 540)
+size = Vector2(16, 40)
+color = Color(0.5, 0.32, 0.18, 1)
+
+[node name="BoatVisual" type="ColorRect" parent="BeachDock"]
+position = Vector2(450, 560)
+size = Vector2(52, 28)
+color = Color(0.6, 0.42, 0.25, 1)
+
+[node name="HiddenCove" type="Node2D" parent="."]
+
+[node name="CoveGround" type="ColorRect" parent="HiddenCove"]
+position = Vector2(32, 400)
+size = Vector2(160, 120)
+color = Color(0.72, 0.64, 0.42, 1)
+
+[node name="CoveLabel" type="Label" parent="HiddenCove"]
+position = Vector2(38, 450)
+theme_override_colors/font_color = Color(0.3, 0.2, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+text = "HIDDEN COVE"
+
+[node name="CoveRocks" type="StaticBody2D" parent="HiddenCove"]
+position = Vector2(80, 400)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HiddenCove/CoveRocks"]
+shape = SubResource("Shape_cove")
+
+[node name="ShipwreckArea" type="Node2D" parent="."]
+
+[node name="ShipwreckGround" type="ColorRect" parent="ShipwreckArea"]
+position = Vector2(320, 420)
+size = Vector2(200, 120)
+color = Color(0.82, 0.74, 0.5, 1)
+
+[node name="ShipwreckLabel" type="Label" parent="ShipwreckArea"]
+position = Vector2(330, 470)
+theme_override_colors/font_color = Color(0.3, 0.2, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+text = "SHIPWRECK"
+
+[node name="ShipHull" type="StaticBody2D" parent="ShipwreckArea"]
+position = Vector2(400, 460)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipwreckArea/ShipHull"]
+shape = SubResource("Shape_ship")
+
+[node name="ShipVisual" type="ColorRect" parent="ShipwreckArea"]
+position = Vector2(360, 436)
+size = Vector2(80, 48)
+color = Color(0.35, 0.25, 0.15, 1)
+
+[node name="Bridge1" type="Node2D" parent="."]
+
+[node name="BridgeVisual" type="ColorRect" parent="Bridge1"]
+position = Vector2(524, 420)
+size = Vector2(32, 160)
+color = Color(0.5, 0.35, 0.2, 1)
+
+[node name="Bridge2" type="Node2D" parent="."]
+
+[node name="BridgeVisual2" type="ColorRect" parent="Bridge2"]
+position = Vector2(524, 200)
+size = Vector2(32, 220)
+color = Color(0.5, 0.35, 0.2, 1)
+
+[node name="IslandPath" type="Node2D" parent="."]
+
+[node name="IslandGround" type="ColorRect" parent="IslandPath"]
+position = Vector2(640, 80)
+size = Vector2(320, 480)
+color = Color(0.72, 0.64, 0.42, 1)
+
+[node name="IslandLabel" type="Label" parent="IslandPath"]
+position = Vector2(700, 300)
+theme_override_colors/font_color = Color(0.3, 0.2, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+text = "ISLAND PATH"
+
+[node name="IslandShrine" type="Node2D" parent="."]
+
+[node name="ShrineGround" type="ColorRect" parent="IslandShrine"]
+position = Vector2(700, 60)
+size = Vector2(180, 100)
+color = Color(0.65, 0.55, 0.38, 1)
+
+[node name="ShrineLabel" type="Label" parent="IslandShrine"]
+position = Vector2(710, 90)
+theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
+theme_override_font_sizes/font_size = 11
+text = "ISLAND SHRINE"
+
+[node name="ShrineVisual" type="ColorRect" parent="IslandShrine"]
+position = Vector2(772, 68)
+size = Vector2(36, 52)
+color = Color(0.5, 0.45, 0.35, 1)
+
+[node name="ShrineArea" type="Area2D" parent="IslandShrine"]
+position = Vector2(790, 100)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IslandShrine/ShrineArea"]
+shape = SubResource("Shape_shrine")
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="CoastalGuardian1" type="CharacterBody2D" parent="Enemies"]
+position = Vector2(420, 480)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("5_enemy")
+max_health = 55
+move_speed = 70.0
+attack_damage = 10
+detection_range = 120.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemies/CoastalGuardian1"]
+sprite_frames = SubResource("SF_coastal_enemy")
+modulate = Color(0.3, 0.6, 0.85, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/CoastalGuardian1"]
+position = Vector2(0, 8)
+shape = SubResource("Shape_enemy")
+
+[node name="DetectionArea" type="Area2D" parent="Enemies/CoastalGuardian1"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/CoastalGuardian1/DetectionArea"]
+shape = SubResource("Shape_detect")
+
+[node name="AttackArea" type="Area2D" parent="Enemies/CoastalGuardian1"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/CoastalGuardian1/AttackArea"]
+shape = SubResource("Shape_detect")
+
+[node name="CoastalGuardian2" type="CharacterBody2D" parent="Enemies"]
+position = Vector2(700, 300)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("5_enemy")
+max_health = 55
+move_speed = 70.0
+attack_damage = 10
+detection_range = 120.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemies/CoastalGuardian2"]
+sprite_frames = SubResource("SF_coastal_enemy")
+modulate = Color(0.3, 0.6, 0.85, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/CoastalGuardian2"]
+position = Vector2(0, 8)
+shape = SubResource("Shape_enemy")
+
+[node name="DetectionArea" type="Area2D" parent="Enemies/CoastalGuardian2"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/CoastalGuardian2/DetectionArea"]
+shape = SubResource("Shape_detect")
+
+[node name="AttackArea" type="Area2D" parent="Enemies/CoastalGuardian2"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/CoastalGuardian2/AttackArea"]
+shape = SubResource("Shape_detect")
+
+[node name="ShrineGuardian" type="CharacterBody2D" parent="Enemies"]
+position = Vector2(790, 140)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("5_enemy")
+max_health = 90
+move_speed = 55.0
+attack_damage = 14
+detection_range = 100.0
+patrol_radius = 40.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemies/ShrineGuardian"]
+sprite_frames = SubResource("SF_coastal_enemy")
+modulate = Color(0.7, 0.45, 0.9, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/ShrineGuardian"]
+position = Vector2(0, 8)
+shape = SubResource("Shape_enemy")
+
+[node name="DetectionArea" type="Area2D" parent="Enemies/ShrineGuardian"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/ShrineGuardian/DetectionArea"]
+shape = SubResource("Shape_detect")
+
+[node name="AttackArea" type="Area2D" parent="Enemies/ShrineGuardian"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/ShrineGuardian/AttackArea"]
+shape = SubResource("Shape_detect")
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="PearlShell" type="Area2D" parent="Items"]
+position = Vector2(790, 95)
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("4_artifact")
+artifact_id = "pearl_shell"
+artifact_name = "Pearl Shell"
+
+[node name="Sprite2D" type="Sprite2D" parent="Items/PearlShell"]
+modulate = Color(0.3, 0.75, 1.0, 1)
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Items/PearlShell"]
+shape = SubResource("Shape_artifact")
+
+[node name="Label" type="Label" parent="Items/PearlShell"]
+position = Vector2(-36, -24)
+size = Vector2(72, 18)
+theme_override_colors/font_color = Color(0.5, 0.9, 1.0, 1)
+theme_override_font_sizes/font_size = 9
+text = "Pearl Shell"
+horizontal_alignment = 1
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(200, 820)
+
+[node name="ExitArea" type="Area2D" parent="."]
+position = Vector2(200, 860)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+shape = SubResource("Shape_exit")
+
+[node name="ExitLabel" type="Label" parent="ExitArea"]
+position = Vector2(-52, -28)
+size = Vector2(104, 18)
+theme_override_colors/font_color = Color(0.6, 1.0, 0.55, 1)
+theme_override_font_sizes/font_size = 11
+text = "→ To Level 3"
+horizontal_alignment = 1
+
+[node name="HUD" type="CanvasLayer" parent="."]
+instance = ExtResource("1_hud")
+
+[node name="PauseMenu" type="Control" parent="."]
+instance = ExtResource("2_pause")
