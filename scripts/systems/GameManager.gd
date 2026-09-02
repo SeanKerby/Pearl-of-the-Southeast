@@ -256,6 +256,74 @@ const CHAPTER_3_STAGES: Array[Dictionary] = [
 	}
 ]
 
+# Chapter 4: The Final Stage — The Ancient Heart
+const CHAPTER_4_STAGES: Array[Dictionary] = [
+	{
+		"stage_num": 1,
+		"chapter": 4,
+		"name": "The Jungle Ascent",
+		"description": "Dense ancient jungle overgrown with sacred stone totems. A towering Rune Titan steps forward to block your path!",
+		"enemy_id": "rune_titan",
+		"enemy_name": "Rune Titan Golem",
+		"enemy_hp": 130,
+		"is_boss": false,
+		"theme": "heart",
+		"loot": [
+			{"type": "consumable", "id": "healing_fruit", "name": "Healing Fruit", "amount": 2, "chance": 1.0},
+			{"type": "collectible", "id": "ancient_leaf", "name": "Ancient Leaf", "amount": 2, "chance": 1.0},
+			{"type": "gold", "id": "gold", "name": "Gold", "amount": 80, "chance": 1.0}
+		]
+	},
+	{
+		"stage_num": 2,
+		"chapter": 4,
+		"name": "The Masked Ritual Grounds",
+		"description": "Corrupted ritual braziers burning with violet flame. A sinister Shadow Shaman unleashes dark staff hexes!",
+		"enemy_id": "shadow_shaman",
+		"enemy_name": "Shadow Shaman",
+		"enemy_hp": 165,
+		"is_boss": false,
+		"theme": "heart",
+		"loot": [
+			{"type": "consumable", "id": "focus_leaf", "name": "Focus Leaf", "amount": 2, "chance": 1.0},
+			{"type": "consumable", "id": "tropical_potion", "name": "Tropical Potion", "amount": 1, "chance": 1.0},
+			{"type": "gold", "id": "gold", "name": "Gold", "amount": 120, "chance": 1.0}
+		]
+	},
+	{
+		"stage_num": 3,
+		"chapter": 4,
+		"name": "The Void Beast Lair",
+		"description": "A dark subterranean cavern echoing with primal roars. A ferocious Void Crystal Panther leaps from the shadows!",
+		"enemy_id": "crystal_panther",
+		"enemy_name": "Void Crystal Panther",
+		"enemy_hp": 210,
+		"is_boss": false,
+		"theme": "heart",
+		"loot": [
+			{"type": "consumable", "id": "healing_fruit", "name": "Healing Fruit", "amount": 3, "chance": 1.0},
+			{"type": "consumable", "id": "ancient_tonic", "name": "Ancient Tonic", "amount": 1, "chance": 1.0},
+			{"type": "gold", "id": "gold", "name": "Gold", "amount": 160, "chance": 1.0}
+		]
+	},
+	{
+		"stage_num": 4,
+		"chapter": 4,
+		"name": "The Ancient Heart Sanctum",
+		"description": "The sacred altar atop the ancient temple. The Corrupted Empress Naga Queen guards the Ancient Heart across 3 devastating phases!",
+		"enemy_id": "naga_queen",
+		"enemy_name": "Empress Naga (Ancient Heart Guardian)",
+		"enemy_hp": 450,
+		"is_boss": true,
+		"theme": "heart",
+		"loot": [
+			{"type": "artifact", "id": "ancient_heart", "name": "The Ancient Heart (Ultimate Sacred Relic)", "amount": 1, "chance": 1.0},
+			{"type": "consumable", "id": "ancient_tonic", "name": "Ancient Tonic", "amount": 3, "chance": 1.0},
+			{"type": "gold", "id": "gold", "name": "Gold", "amount": 500, "chance": 1.0}
+		]
+	}
+]
+
 var selected_character_id: String = "mangyan"
 var current_health: int = 100
 var is_game_active: bool = false
@@ -268,9 +336,11 @@ var max_unlocked_chapter: int = 1
 var chapter_1_unlocked_stage: int = 1
 var chapter_2_unlocked_stage: int = 1
 var chapter_3_unlocked_stage: int = 1
+var chapter_4_unlocked_stage: int = 1
 var completed_stages_ch1: Array[int] = []
 var completed_stages_ch2: Array[int] = []
 var completed_stages_ch3: Array[int] = []
+var completed_stages_ch4: Array[int] = []
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -297,9 +367,11 @@ func start_new_game(char_id: String = "mangyan") -> void:
 	chapter_1_unlocked_stage = 1
 	chapter_2_unlocked_stage = 1
 	chapter_3_unlocked_stage = 1
+	chapter_4_unlocked_stage = 1
 	completed_stages_ch1.clear()
 	completed_stages_ch2.clear()
 	completed_stages_ch3.clear()
+	completed_stages_ch4.clear()
 	
 	is_game_active = true
 	is_game_paused = false
@@ -315,7 +387,9 @@ func change_level(level_scene_path: String) -> void:
 
 func get_chapter_stages(chapter_num: int = -1) -> Array[Dictionary]:
 	var ch = current_chapter if chapter_num <= 0 else chapter_num
-	if ch == 3:
+	if ch == 4:
+		return CHAPTER_4_STAGES
+	elif ch == 3:
 		return CHAPTER_3_STAGES
 	elif ch == 2:
 		return CHAPTER_2_STAGES
@@ -360,13 +434,26 @@ func complete_stage(stage_num: int, chapter_num: int = -1) -> void:
 		if stage_num == 4:
 			if InventoryManager:
 				InventoryManager.collect_artifact("ancient_stone")
-			print("[GameManager] All 3 Sacred Artifacts collected!")
+			if max_unlocked_chapter < 4:
+				max_unlocked_chapter = 4
+				print("[GameManager] Final Stage Unlocked: The Ancient Heart!")
+	elif ch == 4:
+		if not completed_stages_ch4.has(stage_num):
+			completed_stages_ch4.append(stage_num)
+		if stage_num >= chapter_4_unlocked_stage:
+			chapter_4_unlocked_stage = stage_num + 1
+		if stage_num == 4:
+			if InventoryManager:
+				InventoryManager.collect_artifact("ancient_heart")
+			print("[GameManager] 👑 ALL 4 SACRED ARTIFACTS CLAIMED! THE ANCIENT HEART RESTORED!")
 			
 	stage_completed.emit(ch, stage_num)
 
 func is_stage_completed(stage_num: int, chapter_num: int = -1) -> bool:
 	var ch = current_chapter if chapter_num <= 0 else chapter_num
-	if ch == 3:
+	if ch == 4:
+		return completed_stages_ch4.has(stage_num)
+	elif ch == 3:
 		return completed_stages_ch3.has(stage_num)
 	elif ch == 2:
 		return completed_stages_ch2.has(stage_num)
@@ -374,7 +461,9 @@ func is_stage_completed(stage_num: int, chapter_num: int = -1) -> bool:
 
 func get_max_unlocked_stage(chapter_num: int = -1) -> int:
 	var ch = current_chapter if chapter_num <= 0 else chapter_num
-	if ch == 3:
+	if ch == 4:
+		return chapter_4_unlocked_stage
+	elif ch == 3:
 		return chapter_3_unlocked_stage
 	elif ch == 2:
 		return chapter_2_unlocked_stage

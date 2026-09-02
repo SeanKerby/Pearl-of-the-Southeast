@@ -1,8 +1,9 @@
-﻿[gd_scene load_steps=2 format=3 uid="uid://c6y78n4mq7j2k"]
+[gd_scene format=3 uid="uid://dnjety7s1ijyb"]
 
-[ext_resource type="Script" path="res://scripts/ui/MainMenu.gd" id="1_menu"]
+[ext_resource type="Script" uid="uid://dup1d4mx42v0" path="res://scripts/ui/MainMenu.gd" id="1_menu"]
+[ext_resource type="Texture2D" uid="uid://dd6qighka8o4q" path="res://assets/backgrounds/homepage.jpg" id="2_bg_tex"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1526366894]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,16 +12,29 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_menu")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=367435263]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.06, 0.1, 0.14, 1)
+mouse_filter = 2
+texture = ExtResource("2_bg_tex")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="DecorBorder" type="ReferenceRect" parent="."]
+[node name="OverlayShade" type="ColorRect" parent="." unique_id=341430071]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.04, 0.08, 0.07, 0.28)
+
+[node name="DecorBorder" type="ReferenceRect" parent="." unique_id=1056860910]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,7 +49,7 @@ border_color = Color(0.25, 0.45, 0.45, 0.5)
 border_width = 2.0
 editor_only = false
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=383915017]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,11 +57,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=385184756]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer" unique_id=10289149]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.85, 0.55, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
@@ -57,46 +71,39 @@ theme_override_font_sizes/font_size = 46
 text = "PEARL OF SOUTHEAST"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.65, 0.82, 0.8, 1)
-theme_override_font_sizes/font_size = 18
-text = "A Fictional 2D Action-Adventure Journey"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer" unique_id=1092950629]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="NewGameButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="NewGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1961509719]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(260, 44)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "NEW GAME"
 
-[node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1561559021]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(260, 44)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "CONTINUE"
 
-[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=813886423]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(260, 44)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "SETTINGS"
 
-[node name="CreditsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=519739394]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(260, 44)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "CREDITS"
 
-[node name="SettingsPanel" type="PanelContainer" parent="."]
+[node name="SettingsPanel" type="PanelContainer" parent="." unique_id=494677113]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -112,56 +119,56 @@ offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Margin" type="MarginContainer" parent="SettingsPanel"]
+[node name="Margin" type="MarginContainer" parent="SettingsPanel" unique_id=281285869]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 20
 
-[node name="VBox" type="VBoxContainer" parent="SettingsPanel/Margin"]
+[node name="VBox" type="VBoxContainer" parent="SettingsPanel/Margin" unique_id=1106197070]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="SettingsTitle" type="Label" parent="SettingsPanel/Margin/VBox"]
+[node name="SettingsTitle" type="Label" parent="SettingsPanel/Margin/VBox" unique_id=954568571]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "SETTINGS"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="SettingsPanel/Margin/VBox"]
+[node name="HSeparator" type="HSeparator" parent="SettingsPanel/Margin/VBox" unique_id=1117777563]
 layout_mode = 2
 
-[node name="MusicLabel" type="Label" parent="SettingsPanel/Margin/VBox"]
+[node name="MusicLabel" type="Label" parent="SettingsPanel/Margin/VBox" unique_id=1952077968]
 layout_mode = 2
 text = "Music Volume:"
 
-[node name="MusicSlider" type="HSlider" parent="SettingsPanel/Margin/VBox"]
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/Margin/VBox" unique_id=1682056631]
 unique_name_in_owner = true
 layout_mode = 2
 value = 80.0
 
-[node name="SFXLabel" type="Label" parent="SettingsPanel/Margin/VBox"]
+[node name="SFXLabel" type="Label" parent="SettingsPanel/Margin/VBox" unique_id=559788494]
 layout_mode = 2
 text = "Sound Effects Volume:"
 
-[node name="SFXSlider" type="HSlider" parent="SettingsPanel/Margin/VBox"]
+[node name="SFXSlider" type="HSlider" parent="SettingsPanel/Margin/VBox" unique_id=417524025]
 unique_name_in_owner = true
 layout_mode = 2
 value = 85.0
 
-[node name="Spacer" type="Control" parent="SettingsPanel/Margin/VBox"]
+[node name="Spacer" type="Control" parent="SettingsPanel/Margin/VBox" unique_id=1541389865]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="CloseSettingsButton" type="Button" parent="SettingsPanel/Margin/VBox"]
+[node name="CloseSettingsButton" type="Button" parent="SettingsPanel/Margin/VBox" unique_id=1037616860]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 36)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "BACK"
 
-[node name="CreditsPanel" type="PanelContainer" parent="."]
+[node name="CreditsPanel" type="PanelContainer" parent="." unique_id=354126206]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -177,44 +184,44 @@ offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Margin" type="MarginContainer" parent="CreditsPanel"]
+[node name="Margin" type="MarginContainer" parent="CreditsPanel" unique_id=1055945508]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 20
 
-[node name="VBox" type="VBoxContainer" parent="CreditsPanel/Margin"]
+[node name="VBox" type="VBoxContainer" parent="CreditsPanel/Margin" unique_id=2070863917]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="CreditsTitle" type="Label" parent="CreditsPanel/Margin/VBox"]
+[node name="CreditsTitle" type="Label" parent="CreditsPanel/Margin/VBox" unique_id=1192665291]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "CREDITS"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="CreditsPanel/Margin/VBox"]
+[node name="HSeparator" type="HSeparator" parent="CreditsPanel/Margin/VBox" unique_id=1999095633]
 layout_mode = 2
 
-[node name="CreditsText" type="Label" parent="CreditsPanel/Margin/VBox"]
+[node name="CreditsText" type="Label" parent="CreditsPanel/Margin/VBox" unique_id=1442218429]
 layout_mode = 2
 theme_override_constants/line_spacing = 6
 theme_override_font_sizes/font_size = 14
 text = "PEARL OF SOUTHEAST
-BSIT-4 Game Development Project
-
+BSIT-3 Game Development Project
+Developed CCBB
 Fictional adventure inspired by Philippine landscapes
 and cultural heritage diversity.
 
-Built with Godot Engine 4.x"
+"
 horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="CreditsPanel/Margin/VBox"]
+[node name="Spacer" type="Control" parent="CreditsPanel/Margin/VBox" unique_id=916978398]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="CloseCreditsButton" type="Button" parent="CreditsPanel/Margin/VBox"]
+[node name="CloseCreditsButton" type="Button" parent="CreditsPanel/Margin/VBox" unique_id=236463699]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 36)
 layout_mode = 2

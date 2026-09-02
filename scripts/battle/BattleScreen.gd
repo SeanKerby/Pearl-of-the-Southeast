@@ -7,7 +7,7 @@ signal battle_completed(victory: bool, rewards: Dictionary)
 enum TurnState { PLAYER_TURN, PLAYER_ANIMATING, ENEMY_TURN, ENEMY_ANIMATING, BATTLE_END }
 
 # UI Node References
-@onready var background_rect: ColorRect = $Background
+@onready var battle_background: TextureRect = %BattleBackground
 @onready var hero_sprite: AnimatedSprite2D = %HeroSprite
 @onready var hero_hp_bar: ProgressBar = %HeroHPBar
 @onready var hero_hp_label: Label = %HeroHPLabel
@@ -78,6 +78,10 @@ func _ready() -> void:
 	scramble_button.pressed.connect(_on_scramble_pressed)
 	items_button.pressed.connect(_on_items_button_pressed)
 	blessing_button.pressed.connect(_on_blessing_pressed)
+	
+	var continue_btn = victory_panel.get_node_or_null("%ContinueButton")
+	if continue_btn:
+		continue_btn.pressed.connect(_on_continue_pressed)
 
 var stage_index: int = 1
 var stage_chapter: int = 1
@@ -97,8 +101,8 @@ func setup_battle(
 	stage_index = stg_num
 	stage_chapter = stg_chap
 	character_id = char_id
-	player_current_hp = p_hp
-	player_max_hp = p_max_hp
+	player_max_hp = p_max_hp if p_max_hp > 0 else 100
+	player_current_hp = p_hp if p_hp > 0 else player_max_hp
 	
 	enemy_id = e_id
 	enemy_name = e_name
@@ -115,6 +119,7 @@ func setup_battle(
 	enemy_defense_buff = 1.0
 	locked_tile_indices.clear()
 	
+	_setup_battle_background(_bg_theme, stg_chap)
 	_setup_hero_visuals()
 	_setup_enemy_visuals()
 	_update_ui()
@@ -131,6 +136,37 @@ func setup_battle(
 		
 	show_toast("Word Battle Started! Create words to strike!")
 
+func _setup_battle_background(theme_name: String, chap_num: int) -> void:
+	if not battle_background:
+		return
+	
+	var bg_path: String = "res://assets/backgrounds/battle_stage1_coastal.jpg"
+	if chap_num == 4 or theme_name in ["final", "heart"]:
+		bg_path = "res://assets/backgrounds/battle_stage4_final.jpg"
+		if not ResourceLoader.exists(bg_path):
+			bg_path = "res://assets/backgrounds/final battle.jpg"
+	elif chap_num == 3 or theme_name == "ruins":
+		bg_path = "res://assets/backgrounds/battle_stage3_forgotten_ruins.jpg"
+	elif chap_num == 2 or theme_name == "coastal":
+		bg_path = "res://assets/backgrounds/battle_stage2_sunken_coast.jpg"
+	else:
+		bg_path = "res://assets/backgrounds/battle_stage1_coastal.jpg"
+		
+	# Fallback paths
+	if not ResourceLoader.exists(bg_path):
+		if chap_num == 4 or theme_name in ["final", "heart"]:
+			bg_path = "res://assets/backgrounds/final_background.jpg"
+		elif chap_num == 3 or theme_name == "ruins":
+			bg_path = "res://scenes/battle/forgotten_ruins_battle_background.jpg"
+		elif chap_num == 2 or theme_name == "coastal":
+			bg_path = "res://scenes/battle/sunken_coast_battle_background.jpg"
+		else:
+			bg_path = "res://scenes/battle/coastal_battle_bg.jpg"
+			
+	if ResourceLoader.exists(bg_path):
+		battle_background.texture = load(bg_path)
+		print("[BattleScreen] Loaded battle background: %s" % bg_path)
+
 func _setup_hero_visuals() -> void:
 	hero_name_label.text = GameManager.get_selected_character_data().get("name", "Explorer")
 	_build_hero_spritesheet(character_id)
@@ -145,6 +181,8 @@ func _setup_enemy_visuals() -> void:
 	# Setup enemy animations / frames
 	var frames = SpriteFrames.new()
 	frames.add_animation("idle")
+	frames.add_animation("attack")
+	frames.add_animation("defeat")
 	
 	match enemy_id:
 		"crab":
@@ -207,6 +245,34 @@ func _setup_enemy_visuals() -> void:
 				var path = "res://assets/enemies/ruin_guardian_walk_%d.png" % i
 				if ResourceLoader.exists(path):
 					frames.add_frame("idle", load(path))
+		"rune_titan":
+			if ResourceLoader.exists("res://assets/enemies/rune_titan.png"):
+				frames.add_frame("idle", load("res://assets/enemies/rune_titan.png"))
+			if ResourceLoader.exists("res://assets/enemies/rune_titan_attack.png"):
+				frames.add_frame("attack", load("res://assets/enemies/rune_titan_attack.png"))
+			if ResourceLoader.exists("res://assets/enemies/rune_titan_defeat.png"):
+				frames.add_frame("defeat", load("res://assets/enemies/rune_titan_defeat.png"))
+		"shadow_shaman":
+			if ResourceLoader.exists("res://assets/enemies/shadow_shaman.png"):
+				frames.add_frame("idle", load("res://assets/enemies/shadow_shaman.png"))
+			if ResourceLoader.exists("res://assets/enemies/shadow_shaman_attack.png"):
+				frames.add_frame("attack", load("res://assets/enemies/shadow_shaman_attack.png"))
+			if ResourceLoader.exists("res://assets/enemies/shadow_shaman_defeat.png"):
+				frames.add_frame("defeat", load("res://assets/enemies/shadow_shaman_defeat.png"))
+		"crystal_panther":
+			if ResourceLoader.exists("res://assets/enemies/crystal_panther.png"):
+				frames.add_frame("idle", load("res://assets/enemies/crystal_panther.png"))
+			if ResourceLoader.exists("res://assets/enemies/crystal_panther_attack.png"):
+				frames.add_frame("attack", load("res://assets/enemies/crystal_panther_attack.png"))
+			if ResourceLoader.exists("res://assets/enemies/crystal_panther_defeat.png"):
+				frames.add_frame("defeat", load("res://assets/enemies/crystal_panther_defeat.png"))
+		"naga_queen", "ancient_heart_guardian":
+			if ResourceLoader.exists("res://assets/enemies/naga_queen.png"):
+				frames.add_frame("idle", load("res://assets/enemies/naga_queen.png"))
+			if ResourceLoader.exists("res://assets/enemies/naga_queen_attack.png"):
+				frames.add_frame("attack", load("res://assets/enemies/naga_queen_attack.png"))
+			if ResourceLoader.exists("res://assets/enemies/naga_queen_defeat.png"):
+				frames.add_frame("defeat", load("res://assets/enemies/naga_queen_defeat.png"))
 					
 	if frames.has_animation("idle") and frames.get_frame_count("idle") > 0:
 		frames.set_animation_speed("idle", 4.0)
@@ -350,9 +416,10 @@ func _update_word_preview() -> void:
 	word_display.text = word if word != "" else "[ SELECT LETTERS ]"
 	
 	if word == "":
-		word_preview_label.text = "Select letters to form a word."
+		word_preview_label.text = "Click or type letters below to form a word."
 		rating_label.text = ""
-		attack_button.disabled = true
+		attack_button.disabled = false
+		word_display.add_theme_color_override("font_color", Color(0.7, 0.85, 0.8))
 		return
 		
 	var is_valid = WordValidator.is_valid_word(word) if WordValidator else (word.length() >= 3)
@@ -375,8 +442,8 @@ func _update_word_preview() -> void:
 		rating_label.text = calc["rating"]
 		word_display.add_theme_color_override("font_color", Color(0.4, 1.0, 0.4))
 	else:
-		attack_button.disabled = (word.length() < 3)
-		word_preview_label.text = "Invalid word (not in dictionary)"
+		attack_button.disabled = false
+		word_preview_label.text = "Word not recognized in dictionary."
 		rating_label.text = ""
 		word_display.add_theme_color_override("font_color", Color(1.0, 0.4, 0.4))
 
@@ -387,14 +454,18 @@ func _on_attack_pressed() -> void:
 		return
 		
 	var word = _get_current_word()
-	if word.length() < 2:
+	if word == "":
+		show_toast("Click letters on the grid below to spell a word first!")
+		AudioManager.play_tile_click()
+		return
+	elif word.length() < 2:
 		show_toast("Form a word with 2 or more letters!")
 		AudioManager.play_word_invalid()
 		return
 		
 	var is_valid = WordValidator.is_valid_word(word) if WordValidator else false
 	if not is_valid:
-		show_toast("'%s' is not a recognized word!" % word)
+		show_toast("'%s' is not in the dictionary! Try another word." % word)
 		AudioManager.play_word_invalid()
 		return
 		
@@ -638,6 +709,32 @@ func _prepare_enemy_intent() -> void:
 					enemy_intent_label.text = "Intent: Ruin Cave-In (Locks 4 Tiles)"
 				3:
 					enemy_intent_label.text = "Intent: CATACLYSMIC TITAN SMASH (~40 DMG!)"
+		"rune_titan":
+			if randf() < 0.35:
+				enemy_intent_label.text = "Intent: Ancient Rune Barrier (+50% Defense)"
+			else:
+				enemy_intent_label.text = "Intent: Rune Smash (~22 DMG)"
+		"shadow_shaman":
+			if randf() < 0.4:
+				enemy_intent_label.text = "Intent: Dark Mind Hex (Locks 3 Tiles)"
+			else:
+				enemy_intent_label.text = "Intent: Void Staff Hex (~20 DMG)"
+		"crystal_panther":
+			if randf() < 0.4:
+				enemy_intent_label.text = "Intent: Void Pounce (Heavy Strike Next Turn!)"
+			else:
+				enemy_intent_label.text = "Intent: Void Crystal Claws (~24 DMG)"
+		"naga_queen", "ancient_heart_guardian":
+			match boss_phase:
+				1:
+					if randf() < 0.4:
+						enemy_intent_label.text = "Intent: Serpent Toxic Venom (Locks 2 Tiles)"
+					else:
+						enemy_intent_label.text = "Intent: Royal Spear Thrust (~22 DMG)"
+				2:
+					enemy_intent_label.text = "Intent: Void Crystal Barrage (~30 DMG, Locks 3 Tiles)"
+				3:
+					enemy_intent_label.text = "Intent: 👑 ANCIENT HEART APOCALYPSE NOVA (~44 DMG, Locks 4 Tiles!)"
 
 func _start_enemy_turn() -> void:
 	current_turn = TurnState.ENEMY_TURN
@@ -661,12 +758,12 @@ func _execute_enemy_action() -> void:
 		var hp_percent = float(enemy_current_hp) / float(enemy_max_hp)
 		if hp_percent <= 0.33 and boss_phase < 3:
 			boss_phase = 3
-			enemy_phase_label.text = "PHASE 3/3 (ENRAGED)"
-			show_toast("%s enters Phase 3! Enraged Titan Fury Awakened!" % enemy_name)
+			enemy_phase_label.text = "PHASE 3/3 (ANCIENT HEART ENRAGED)"
+			show_toast("👑 %s AWAKENS THE APOCALYPTIC ANCIENT HEART POWER!" % enemy_name)
 		elif hp_percent <= 0.66 and boss_phase < 2:
 			boss_phase = 2
 			enemy_phase_label.text = "PHASE 2/3"
-			show_toast("%s enters Phase 2! Earthquakes Rock the Ruins!" % enemy_name)
+			show_toast("%s unleashes Void Crystal Sorcery!" % enemy_name)
 			
 	# Determine damage & ability
 	var enemy_damage: int = 10
@@ -773,6 +870,54 @@ func _execute_enemy_action() -> void:
 				3:
 					enemy_damage = randi_range(32, 42)
 					show_toast("THE RUIN GUARDIAN UNLEASHES A TITAN EARTH-SHATTERS IMPACT!")
+		"rune_titan":
+			if enemy_intent_label.text.contains("Barrier"):
+				enemy_defense_buff = 0.5
+				show_toast("Rune Titan activates ancient stone runes! (+50% Defense)")
+				enemy_damage = 0
+			else:
+				enemy_damage = randi_range(20, 26)
+				enemy_defense_buff = 1.0
+				show_toast("Rune Titan delivers a heavy stone slam!")
+		"shadow_shaman":
+			if enemy_intent_label.text.contains("Hex") and enemy_intent_label.text.contains("Locks"):
+				enemy_damage = randi_range(10, 14)
+				_lock_random_tiles(3)
+				show_toast("Shadow Shaman casts Dark Mind Hex! 3 tiles locked!")
+			else:
+				enemy_damage = randi_range(18, 24)
+				show_toast("Shadow Shaman strikes with a dark void staff projectile!")
+		"crystal_panther":
+			if enemy_charging:
+				enemy_damage = randi_range(36, 46)
+				enemy_charging = false
+				show_toast("Void Crystal Panther lunges with a LETHAL VOID POUNCE!")
+			elif enemy_intent_label.text.contains("Pounce"):
+				enemy_charging = true
+				enemy_damage = 0
+				show_toast("Void Crystal Panther is stalking in the shadows, preparing to pounce next turn!")
+			else:
+				enemy_damage = randi_range(22, 28)
+				show_toast("Void Crystal Panther swipes with crystal claws!")
+		"naga_queen", "ancient_heart_guardian":
+			match boss_phase:
+				1:
+					if enemy_intent_label.text.contains("Venom"):
+						enemy_damage = randi_range(12, 16)
+						_lock_random_tiles(2)
+						show_toast("Empress Naga spits toxic serpent venom! 2 tiles locked!")
+					else:
+						enemy_damage = randi_range(20, 26)
+						show_toast("Empress Naga strikes swiftly with her Royal Golden Spear!")
+				2:
+					enemy_damage = randi_range(26, 34)
+					_lock_random_tiles(3)
+					enemy_current_hp = mini(enemy_max_hp, enemy_current_hp + 20)
+					show_toast("Empress Naga casts Void Crystal Barrage! (+20 HP regenerated, 3 tiles locked!)")
+				3:
+					enemy_damage = randi_range(38, 48)
+					_lock_random_tiles(4)
+					show_toast("👑 EMPRESS NAGA UNLEASHES THE CATACLYSMIC ANCIENT HEART NOVA! 👑")
 					
 	if enemy_damage > 0:
 		# Player takes damage
@@ -915,16 +1060,12 @@ func _on_battle_victory() -> void:
 		"\n".join(loot_lines)
 	]
 	victory_panel.visible = true
-	
-	var continue_btn = victory_panel.get_node_or_null("%ContinueButton")
-	if continue_btn:
-		continue_btn.pressed.connect(func():
-			battle_completed.emit(true, {"stage": stage_index, "chapter": stage_chapter, "enemy_id": enemy_id})
-			queue_free()
-			# If this was loaded directly as standalone scene
-			if get_tree().current_scene == self:
-				GameManager.change_level(GameManager.ADVENTURE_MAP_PATH)
-		)
+
+func _on_continue_pressed() -> void:
+	battle_completed.emit(true, {"stage": stage_index, "chapter": stage_chapter, "enemy_id": enemy_id})
+	queue_free()
+	if get_tree().current_scene == self:
+		GameManager.change_level(GameManager.ADVENTURE_MAP_PATH)
 
 func _on_battle_defeat() -> void:
 	current_turn = TurnState.BATTLE_END

@@ -20,12 +20,12 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://scripts/systems/GameManager.gd"
-InventoryManager="*res://scripts/systems/InventoryManager.gd"
-SaveManager="*res://scripts/systems/SaveManager.gd"
-AudioManager="*res://scripts/systems/AudioManager.gd"
 WordValidator="*res://scripts/systems/WordValidator.gd"
+InventoryManager="*res://scripts/systems/InventoryManager.gd"
+AudioManager="*res://scripts/systems/AudioManager.gd"
 DamageCalculator="*res://scripts/systems/DamageCalculator.gd"
+GameManager="*res://scripts/systems/GameManager.gd"
+SaveManager="*res://scripts/systems/SaveManager.gd"
 
 [display]
 

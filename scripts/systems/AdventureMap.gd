@@ -35,6 +35,7 @@ extends Control
 @onready var chapter_btn_1: Button = %ChapterBtn1
 @onready var chapter_btn_2: Button = %ChapterBtn2
 @onready var chapter_btn_3: Button = %ChapterBtn3
+@onready var chapter_btn_4: Button = %ChapterBtn4
 
 @onready var path_node_1: Button = %PathNode1
 @onready var path_node_2: Button = %PathNode2
@@ -69,6 +70,14 @@ const CH3_POSITIONS: Dictionary = {
 	4: Vector2(625, 583)   # Ancient Glowing Portal Shrine (Boss)
 }
 
+# Node positions for Chapter 4 (final_stage.jpg)
+const CH4_POSITIONS: Dictionary = {
+	1: Vector2(400, 600),  # Ancient Jungle Gateway Steps
+	2: Vector2(585, 480),  # Overgrown Canopy Crossing / Dais
+	3: Vector2(585, 300),  # Ruin Steps to the Inner Sanctum
+	4: Vector2(685, 115)   # The Ancient Heart Temple Altar (Final Boss)
+}
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	path_buttons = [path_node_1, path_node_2, path_node_3, path_node_4]
@@ -76,12 +85,13 @@ func _ready() -> void:
 	# Connect path buttons
 	for i in range(path_buttons.size()):
 		var stg = i + 1
-		path_buttons[i].pressed.connect(func(): _on_node_clicked(stg))
+		path_buttons[i].pressed.connect(_on_node_clicked.bind(stg))
 		
 	# Connect chapter tab buttons
-	chapter_btn_1.pressed.connect(func(): _switch_chapter(1))
-	chapter_btn_2.pressed.connect(func(): _switch_chapter(2))
-	chapter_btn_3.pressed.connect(func(): _switch_chapter(3))
+	chapter_btn_1.pressed.connect(_switch_chapter.bind(1))
+	chapter_btn_2.pressed.connect(_switch_chapter.bind(2))
+	chapter_btn_3.pressed.connect(_switch_chapter.bind(3))
+	chapter_btn_4.pressed.connect(_switch_chapter.bind(4))
 	
 	start_battle_button.pressed.connect(_on_start_battle_pressed)
 	close_modal_button.pressed.connect(_close_stage_modal)
@@ -130,7 +140,7 @@ func _update_header_stats() -> void:
 	if InventoryManager:
 		gold_label.text = "🪙 %d" % InventoryManager.gold
 		var count = InventoryManager.get_collected_count()
-		relics_label.text = "👑 %d / 3 Relics" % count
+		relics_label.text = "👑 %d / 4 Relics" % count
 		var leaves = InventoryManager.get_collectible_count("ancient_leaf")
 		var shells = InventoryManager.get_collectible_count("lost_shell")
 		var stones = InventoryManager.get_collectible_count("stone_fragment")
@@ -143,10 +153,12 @@ func _update_header_stats() -> void:
 	chapter_btn_1.disabled = false
 	chapter_btn_2.disabled = max_chap < 2
 	chapter_btn_3.disabled = max_chap < 3
+	chapter_btn_4.disabled = max_chap < 4
 	
 	chapter_btn_1.modulate = Color(1.0, 0.9, 0.4) if cur_chap == 1 else Color(0.75, 0.75, 0.75)
 	chapter_btn_2.modulate = Color(0.4, 0.85, 1.0) if cur_chap == 2 else (Color(1.0, 1.0, 1.0) if max_chap >= 2 else Color(0.45, 0.45, 0.45))
 	chapter_btn_3.modulate = Color(0.85, 0.5, 1.0) if cur_chap == 3 else (Color(1.0, 1.0, 1.0) if max_chap >= 3 else Color(0.45, 0.45, 0.45))
+	chapter_btn_4.modulate = Color(1.0, 0.35, 0.85) if cur_chap == 4 else (Color(1.0, 1.0, 1.0) if max_chap >= 4 else Color(0.45, 0.45, 0.45))
 
 func _switch_chapter(chapter_num: int) -> void:
 	if GameManager:
@@ -156,7 +168,9 @@ func _switch_chapter(chapter_num: int) -> void:
 func _load_current_chapter_map() -> void:
 	var cur_chap = GameManager.current_chapter if GameManager else 1
 	var map_path = "res://assets/maps/stage 1.jpg"
-	if cur_chap == 3:
+	if cur_chap == 4:
+		map_path = "res://assets/maps/final_stage.jpg"
+	elif cur_chap == 3:
 		map_path = "res://assets/maps/stage3.jpg"
 	elif cur_chap == 2:
 		map_path = "res://assets/maps/stage2.jpg"
@@ -172,7 +186,9 @@ func _load_current_chapter_map() -> void:
 
 func _get_current_positions() -> Dictionary:
 	var cur_chap = GameManager.current_chapter if GameManager else 1
-	if cur_chap == 3:
+	if cur_chap == 4:
+		return CH4_POSITIONS
+	elif cur_chap == 3:
 		return CH3_POSITIONS
 	elif cur_chap == 2:
 		return CH2_POSITIONS
@@ -278,9 +294,16 @@ func _show_artifact_celebration(chapter_completed: int) -> void:
 	elif chapter_completed == 3:
 		artifact_title_label.text = "👑 THIRD SACRED ARTIFACT ACQUIRED! 👑"
 		artifact_name_label.text = "THE ANCIENT STONE (EARTH RELIC)"
-		artifact_desc_label.text = "You toppled the colossal Ruin Guardian Titan and claimed the 3rd Sacred Artifact!\n\nAll 3 Sacred Artifacts are now united! You have restored harmony to the Pearl of the South!"
+		artifact_desc_label.text = "You toppled the colossal Ruin Guardian Titan and claimed the 3rd Sacred Artifact!\n\nEarth and stone tremor with your power!\n\nFinal Stage: The Ancient Heart Sanctum is now revealed!"
 		if ResourceLoader.exists("res://assets/items/ancient_stone_relic.png"):
 			artifact_icon_sprite.texture = load("res://assets/items/ancient_stone_relic.png")
+		proceed_next_stage_button.text = "🔮 TRAVEL TO FINAL STAGE: THE ANCIENT HEART"
+	elif chapter_completed == 4:
+		artifact_title_label.text = "👑 GRAND FINALE: THE ANCIENT HEART RESTORED! 👑"
+		artifact_name_label.text = "THE ANCIENT HEART (ULTIMATE SACRED ARTIFACT)"
+		artifact_desc_label.text = "You purified the Empress Naga and reclaimed the Ancient Heart!\n\nAll 4 Sacred Artifacts are united! Harmony, balance, and primal light have returned to the Pearl of the South!\n\nCongratulations on conquering the entire Tropical Word RPG!"
+		if ResourceLoader.exists("res://assets/items/ancient_heart_relic.png"):
+			artifact_icon_sprite.texture = load("res://assets/items/ancient_heart_relic.png")
 		proceed_next_stage_button.text = "🏆 RETURN TO WORLD MAP"
 		
 	artifact_modal.visible = true
@@ -299,6 +322,8 @@ func _on_proceed_next_stage_pressed() -> void:
 		_switch_chapter(2)
 	elif current_celebration_chap == 2:
 		_switch_chapter(3)
+	elif current_celebration_chap == 3:
+		_switch_chapter(4)
 	else:
 		_refresh_nodes()
 
@@ -316,8 +341,10 @@ func _on_start_battle_pressed() -> void:
 	add_child(battle)
 	
 	var char_id = GameManager.selected_character_id if GameManager else "mangyan"
-	var p_hp = GameManager.current_health if GameManager else 100
 	var p_max_hp = GameManager.get_selected_character_data().get("max_health", 100) if GameManager else 100
+	var p_hp = GameManager.current_health if (GameManager and GameManager.current_health > 0) else p_max_hp
+	if GameManager:
+		GameManager.current_health = p_hp
 	
 	var theme_name = "ruins" if cur_chap == 3 else ("coastal" if cur_chap == 2 else "forest")
 	
@@ -334,7 +361,18 @@ func _on_start_battle_pressed() -> void:
 		cur_chap
 	)
 	
+	# Hide map interactive elements while in battle
+	$TopHUDContainer.visible = false
+	$PathNodesLayer.visible = false
+	if $MapTextureRect:
+		$MapTextureRect.visible = false
+	
 	battle.battle_completed.connect(func(victory: bool, data: Dictionary):
+		$TopHUDContainer.visible = true
+		$PathNodesLayer.visible = true
+		if $MapTextureRect:
+			$MapTextureRect.visible = true
+			
 		if victory:
 			_update_header_stats()
 			_refresh_nodes()

@@ -41,6 +41,14 @@ const ARTIFACT_DEFINITIONS: Dictionary = {
 		"description": "An intricately carved monolith resonant with forgotten earth magic. Earth & ancient words deal +60% bonus damage!",
 		"icon_path": "res://assets/items/ancient_stone_relic.png",
 		"active_skill": "Earth Tremor"
+	},
+	"ancient_heart": {
+		"id": "ancient_heart",
+		"name": "The Ancient Heart (Ultimate Sacred Relic)",
+		"location": "Final Stage — The Ancient Heart",
+		"description": "The primordial source of balance and life. Empowers all elemental words with +100% damage and restores harmony to the Pearl of the South!",
+		"icon_path": "res://assets/items/ancient_heart_relic.png",
+		"active_skill": "Heart of Creation"
 	}
 }
 
@@ -79,7 +87,8 @@ var collected_artifacts: Dictionary = {
 	"forest_relic": false,
 	"water_relic": false,
 	"pearl_shell": false,
-	"ancient_stone": false
+	"ancient_stone": false,
+	"ancient_heart": false
 }
 
 var consumable_counts: Dictionary = {

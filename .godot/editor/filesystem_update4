@@ -1,4 +1,4 @@
-res://scripts/battle/BattleScreen.gd
 res://scripts/systems/GameManager.gd
 res://scripts/systems/InventoryManager.gd
-res://scenes/levels/Level1_Forest.tscn
+res://scripts/battle/BattleScreen.gd
+res://scripts/systems/AdventureMap.gd
