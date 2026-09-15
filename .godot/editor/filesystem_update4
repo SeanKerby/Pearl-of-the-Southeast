@@ -1,4 +1,2 @@
-res://scripts/systems/GameManager.gd
-res://scripts/systems/InventoryManager.gd
-res://scripts/battle/BattleScreen.gd
+res://scenes/main_menu/MainMenu.tscn
 res://scripts/systems/AdventureMap.gd

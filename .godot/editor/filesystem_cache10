@@ -1,12 +1,12 @@
 78098b89c88a74ebe8c20117b8754620
-::res://::1788319963
+::res://::1789438795
 export_presets.cfg::TextFile::-1::1787421409::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::1341459576982292069::1787412827::1787412864::1::::<><><>0<>0<>a4f21724194a853d23842754fbb214c3<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 node_2d.tscn::PackedScene::4787033144111637796::1787418782::0::1::::<><><>0<>0<><>::uid://0bhoytmo7utj::::res://media/tileset.png
 README.md::TextFile::-1::1787544673::0::1::::<><><>0<>0<><>::
 ::res://assets/::1787576331
 ::res://assets/audio/::1787416000
-::res://assets/backgrounds/::1788322525
+::res://assets/backgrounds/::1788322951
 battle_stage1_coastal.jpg::CompressedTexture2D::5864861684500222988::1787575834::1787576667::1::::<><><>0<>0<>d4be8ba182ced10ab509ae88b09109bd<>res://.godot/imported/battle_stage1_coastal.jpg-c277be26d24c88264247d7812b757a43.ctex::
 battle_stage2_sunken_coast.jpg::CompressedTexture2D::7320566849844423075::1787575941::1787576667::1::::<><><>0<>0<>2f46ffffad67263102d5cc73dfba1bde<>res://.godot/imported/battle_stage2_sunken_coast.jpg-eb359c99588b064d5b12a1bc3981793e.ctex::
 battle_stage3_forgotten_ruins.jpg::CompressedTexture2D::8678165379433895911::1787576043::1787576666::1::::<><><>0<>0<>e709f44bd83d524799a313278f89b957<>res://.godot/imported/battle_stage3_forgotten_ruins.jpg-038004575d148a1c44472eae8a5301f0.ctex::
@@ -88,7 +88,7 @@ walk_down.png::CompressedTexture2D::4284779676058810194::1787206742::1787418677:
 walk_left.png::CompressedTexture2D::6083735633056810058::1787206742::1787418677::1::::<><><>0<>0<>fc40bf70a79719846293999c205d00a6<>res://.godot/imported/walk_left.png-b02e0b678e4ea4a5ba3361777f5dfb94.ctex::
 walk_right.png::CompressedTexture2D::7796465692066050478::1787206742::1787418677::1::::<><><>0<>0<>8664af1ee62723225d51dc0a862cedcd<>res://.godot/imported/walk_right.png-54618dbf17f405aeb17891b3f214f07c.ctex::
 walk_up.png::CompressedTexture2D::4476637135008521007::1787206742::1787418677::1::::<><><>0<>0<>41bf534a32d0f10114a104066bc034a7<>res://.godot/imported/walk_up.png-5e007b65e10b9df1e46a8218553d8267.ctex::
-::res://assets/enemies/::1788322525
+::res://assets/enemies/::1788322951
 ancient_heart_guardian.png::CompressedTexture2D::402086788435716897::1788322801::1788322951::1::::<><><>0<>0<>be49949cc5cdf6b8a433a5a53e902b5f<>res://.godot/imported/ancient_heart_guardian.png-81cd897278576bac75081bc1812be344.ctex::
 ancient_heart_guardian_attack.png::CompressedTexture2D::4155002160029720144::1788322801::1788322951::1::::<><><>0<>0<>ee54e0c1c71df8f6ec69837053b1ca63<>res://.godot/imported/ancient_heart_guardian_attack.png-a31f66b91a5710a5326413543f09ca39.ctex::
 ancient_heart_guardian_defeat.png::CompressedTexture2D::2072267973111245640::1788322801::1788322951::1::::<><><>0<>0<>0f3cf79800cdaec29e0d3de7ad0fe6c5<>res://.godot/imported/ancient_heart_guardian_defeat.png-1f1dcad334a4dd77cb41cf0cee6d8858.ctex::
@@ -175,7 +175,8 @@ water_guardian_walk_4.png::CompressedTexture2D::4790729201575208619::1787540761:
 main_tileset.tres::TileSet::4677838517038413147::1787425611::0::1::::<><><>0<>0<><>::uid://0bhoytmo7utj::::res://media/tileset.png
 tileset.png::CompressedTexture2D::1677851452936783724::1787414099::1787418678::1::::<><><>0<>0<>72d759e9d59fce69cfb4a70dcd9979a4<>res://.godot/imported/tileset.png-5c1e670688c4574c90ca9e426252e313.ctex::
 ::res://assets/environments/coastal/::1787416000
-::res://assets/environments/forest/::1787471184
+::res://assets/environments/forest/::1788535434
+122336505596550.png::CompressedTexture2D::1217885614570268337::1788535435::1789438798::1::::<><><>0<>0<>1a8f0e15a16add3cbf9dd24c1e292cb7<>res://.godot/imported/122336505596550.png-c235689946b7dc0aba288340b7ed84be.ctex::
 boat_bangka.png::CompressedTexture2D::4491619645894916693::1787427784::1787428029::1::::<><><>0<>0<>fdf72699359c80fc929098d7b00ff5a3<>res://.godot/imported/boat_bangka.png-7208040a08a52fa8e7efbd89ad885699.ctex::
 boat_sail.png::CompressedTexture2D::4877558905271032907::1787469996::1787470058::1::::<><><>0<>0<>2c5dc3d58bb554b97b4873aa957d5dd8<>res://.godot/imported/boat_sail.png-4e02e653a3cd83eaec6649b9ff500b11.ctex::
 boat_wood.png::CompressedTexture2D::3620191836036410611::1787427784::1787428029::1::::<><><>0<>0<>1896443845b62519dd57985eb054c2ba<>res://.godot/imported/boat_wood.png-5a26f096f6f30f3413528ce6e187478a.ctex::
@@ -202,7 +203,7 @@ tree_round.png::CompressedTexture2D::8410947549850326708::1787427784::1787428028
 tree_round_2.png::CompressedTexture2D::1109416440089342034::1787427784::1787428028::1::::<><><>0<>0<>1ee6269c604c5d221d2e9ea6890bcb77<>res://.godot/imported/tree_round_2.png-bb5e952c1fbf8a678bb584387957b67d.ctex::
 waterfall.png::CompressedTexture2D::6240163486340883775::1787427784::1787428028::1::::<><><>0<>0<>903aec9ba80fadd3b4aa4417074f0618<>res://.godot/imported/waterfall.png-70189b0d4c475fe8e4c053afa2c4eeef.ctex::
 ::res://assets/environments/ruins/::1787416000
-::res://assets/items/::1788322525
+::res://assets/items/::1788322950
 ancient_heart_relic.png::CompressedTexture2D::7761263542555709323::1788322846::1788322950::1::::<><><>0<>0<>12c522b03f7a4edb894a8833b3e1c812<>res://.godot/imported/ancient_heart_relic.png-466e2e97f7572df054cb3604a0822689.ctex::
 ancient_leaf.png::CompressedTexture2D::4432619720513075550::1787471015::1787471042::1::::<><><>0<>0<>7fbfc99a635561c50097c3f1d16ebb04<>res://.godot/imported/ancient_leaf.png-6d66667765a2e56c653405b9a7e687ec.ctex::
 ancient_stone_relic.png::CompressedTexture2D::7683395871209546614::1787541598::1787541826::1::::<><><>0<>0<>1c52ab8c64e41d22597aeea77f1b2bb6<>res://.godot/imported/ancient_stone_relic.png-431612d03ba7d94af709410c9712738c.ctex::
@@ -318,7 +319,7 @@ Chest.tscn::PackedScene::-1::1787468667::0::1::::<><><>0<>0<><>::
 CollectibleItem.tscn::PackedScene::-1::1787427117::0::1::::<><><>0<>0<><>::
 NPC.tscn::PackedScene::-1::1787425202::0::1::::<><><>0<>0<><>::
 ::res://scenes/levels/::1787577650
-AdventureMap.tscn::PackedScene::-1::1787541715::0::1::::<><><>0<>0<><>::res://scripts/systems/AdventureMap.gd<>res://assets/maps/level1_adventure_map.jpg<>res://assets/characters/mangyan/idle_down.png<>res://assets/enemies/crab.png
+AdventureMap.tscn::PackedScene::-1::1788323059::0::1::::<><><>0<>0<><>::res://scripts/systems/AdventureMap.gd<>res://assets/maps/stage 1.jpg<>res://assets/characters/mangyan/idle_down.png<>res://assets/enemies/crab.png<>res://assets/items/forest_relic.png
 FinalArea.tscn::PackedScene::-1::1787418415::0::1::::<><><>0<>0<><>::res://scenes/ui/HUD.tscn<>res://scenes/ui/PauseMenu.tscn<>res://scripts/systems/FinalArea.gd
 Level1_Forest.tscn::PackedScene::8472748847814214430::1787577650::0::1::::<><><>0<>0<><>::uid://dp6m0xrq2ty5l::::res://scenes/ui/HUD.tscn<>res://scenes/ui/PauseMenu.tscn<>uid://dtjdarnbjouy7::::res://scripts/systems/Level1_Forest.gd<>uid://chgelk81yeg4o::::res://assets/environments/forest/level1_map.png<>res://scenes/enemies/Boar.tscn<>res://scenes/enemies/Crab.tscn<>res://scenes/enemies/Spirit.tscn<>res://scenes/enemies/ForestGuardianBoss.tscn<>res://scenes/items/Chest.tscn<>res://scenes/items/CollectibleItem.tscn<>uid://b4fgumwj24bba::::res://assets/items/ancient_leaf.png<>uid://bhl24m8n56r85::::res://assets/items/lost_shell.png<>uid://dnpxftovcxoco::::res://assets/items/stone_fragment.png
 Level2_Coastal.tscn::PackedScene::-1::1787418210::0::1::::<><><>0<>0<><>::res://scenes/ui/HUD.tscn<>res://scenes/ui/PauseMenu.tscn<>res://scripts/systems/Level2_Coastal.gd<>res://scripts/items/artifact.gd<>res://scripts/enemies/enemy.gd
@@ -335,7 +336,7 @@ PauseMenu.tscn::PackedScene::-1::1787416850::0::1::::<><><>0<>0<><>::res://scrip
 Victory.tscn::PackedScene::-1::1787416979::0::1::::<><><>0<>0<><>::res://scripts/ui/Victory.gd
 ::res://scripts/::1787467645
 ::res://scripts/battle/::1787468265
-BattleScreen.gd::GDScript::1679816081216181564::1787577593::0::1::::<>CanvasLayer<><>0<>0<><>::
+BattleScreen.gd::GDScript::1679816081216181564::1788323196::0::1::::<>CanvasLayer<><>0<>0<><>::
 BattleVFX.gd::GDScript::6470256007325305607::1787468769::0::1::::BattleVFX<>RefCounted<><>0<>0<><>::
 ::res://scripts/enemies/::1787418674
 enemy.gd::GDScript::4971370020235729811::1787467854::0::1::::<>CharacterBody2D<><>0<>0<><>::
@@ -345,13 +346,13 @@ collectible_item.gd::GDScript::7987223780824636046::1787467939::0::1::::<>Area2D
 ::res://scripts/player/::1787418674
 player.gd::GDScript::3808984794261870670::1787468677::0::1::::Player<>CharacterBody2D<><>0<>0<><>::
 ::res://scripts/systems/::1787578588
-AdventureMap.gd::GDScript::1229859845894782886::1787578588::0::1::::<>Control<><>0<>0<><>::
+AdventureMap.gd::GDScript::1229859845894782886::1788323118::0::1::::<>Control<><>0<>0<><>::
 AudioManager.gd::GDScript::1387815685161302486::1787467628::0::1::::<>Node<><>0<>0<><>::
 base_level.gd::GDScript::2974485709646698460::1787416999::0::1::::<>Node2D<><>0<>0<><>::
 DamageCalculator.gd::GDScript::2375963145044945081::1787467614::0::1::::<>Node<><>0<>0<><>::
 FinalArea.gd::GDScript::1764604439073014428::1787429957::0::1::::<>Node2D<><>0<>0<><>::
-GameManager.gd::GDScript::2104999802707963194::1787541645::0::1::::<>Node<><>0<>0<><>::
-InventoryManager.gd::GDScript::6965206629214539348::1787541739::0::1::::<>Node<><>0<>0<><>::
+GameManager.gd::GDScript::2104999802707963194::1788326180::0::1::::<>Node<><>0<>0<><>::
+InventoryManager.gd::GDScript::6965206629214539348::1788323034::0::1::::<>Node<><>0<>0<><>::
 Level1_Forest.gd::GDScript::8511612544004202368::1787468026::0::1::::<>Node2D<><>0<>0<><>::
 Level2_Coastal.gd::GDScript::1326403873177339787::1787429903::0::1::::<>Node2D<><>0<>0<><>::
 Level3_Ruins.gd::GDScript::5295225801807092763::1787429931::0::1::::<>Node2D<><>0<>0<><>::
