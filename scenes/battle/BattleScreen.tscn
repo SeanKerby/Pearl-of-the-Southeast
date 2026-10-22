@@ -155,12 +155,14 @@ mouse_filter = 2
 unique_name_in_owner = true
 position = Vector2(150, 480)
 scale = Vector2(3.0, 3.0)
+texture_filter = 1
 
 [node name="EnemyStaticSprite" type="Sprite2D" parent="EnemyContainer"]
 unique_name_in_owner = true
 visible = false
 position = Vector2(150, 480)
 scale = Vector2(2.8, 2.8)
+texture_filter = 1
 texture = ExtResource("3_crab_tex")
 
 [node name="EnemyPanel" type="PanelContainer" parent="EnemyContainer"]

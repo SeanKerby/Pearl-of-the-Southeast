@@ -290,6 +290,24 @@ func _setup_enemy_visuals() -> void:
 			enemy_static_sprite.visible = true
 			enemy_sprite.visible = false
 
+	# --- Scale and texture quality adjustments ---
+	# Chapter 4 enemies have larger raw sprites (~190px tall vs ~64px for Ch1-3)
+	# so they need a smaller scale multiplier. Ch1-3 use scale 3.0 from the scene.
+	var ch4_enemies = ["rune_titan", "shadow_shaman", "crystal_panther", "naga_queen", "ancient_heart_guardian"]
+	if enemy_id in ch4_enemies:
+		# At 3x these sprites would be ~570px tall — too big. Use 1.5x instead.
+		var ch4_scale = Vector2(1.5, 1.5)
+		enemy_sprite.scale = ch4_scale
+		enemy_static_sprite.scale = ch4_scale
+	else:
+		# Restore default scene scale for Ch1-3 enemies
+		enemy_sprite.scale = Vector2(3.0, 3.0)
+		enemy_static_sprite.scale = Vector2(2.8, 2.8)
+
+	# Enable linear texture filtering to prevent pixel-art scaling artifacts
+	enemy_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	enemy_static_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+
 func _build_hero_spritesheet(char_id: String) -> void:
 	var base_path: String = "res://characters/%s/" % char_id
 	var frames: SpriteFrames = SpriteFrames.new()

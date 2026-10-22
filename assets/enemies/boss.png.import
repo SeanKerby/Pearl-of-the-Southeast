@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c135dovq580y"
-path="res://.godot/imported/levels_2_3_final_map.jpg-c033d091ca3ceef0f31a7cc6863cf57f.ctex"
+uid="uid://bmyynfplaf6vt"
+path="res://.godot/imported/boss.png-e082db91d6fa1618aacdf6fe050837a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/maps/levels_2_3_final_map.jpg"
-dest_files=["res://.godot/imported/levels_2_3_final_map.jpg-c033d091ca3ceef0f31a7cc6863cf57f.ctex"]
+source_file="res://assets/enemies/boss.png"
+dest_files=["res://.godot/imported/boss.png-e082db91d6fa1618aacdf6fe050837a1.ctex"]
 
 [params]
 
